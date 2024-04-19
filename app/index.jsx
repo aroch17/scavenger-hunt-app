@@ -1,13 +1,13 @@
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
-import { Redirect, router } from "expo-router";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home = () => {
 	return (
-		<SafeAreaView className="bg-black">
-			<ScrollView contentContainerStyle={{height: '100%'}}>
+		<SafeAreaView className="bg-black h-full">
+			<ScrollView contentContainerStyle={{ height: "100%" }}>
 				<View className="bg-black h-full flex justify-center items-center">
 					<Text className="text-white text-3xl font-pbold mb-4">
 						Scavenger Hunt
