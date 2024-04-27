@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import React from "react";
 import { SplashScreen, Stack } from "expo-router";
-import { GlobalProvider } from '../context/GlobalProvider'
+import { GlobalProvider } from "../context/GlobalProvider";
 
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
 	const [fontsLoaded, error] = useFonts({
@@ -38,8 +39,11 @@ export default function App() {
 		<GlobalProvider>
 			<Stack>
 				<Stack.Screen name="index" options={{ headerShown: false }} />
+				<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 				<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
 				<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
+				<Stack.Screen name="home" options={{ headerShown: false }} />
+				<Stack.Screen name="profile" options={{ headerShown: false }} />
 			</Stack>
 		</GlobalProvider>
 	);
