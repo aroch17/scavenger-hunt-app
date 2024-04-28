@@ -39,6 +39,7 @@ export default function App() {
 		<Stack>
 			<Stack.Screen name="index" options={{ headerShown: false}}/>
 			<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
+			<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
 		</Stack>
 	);
 }
