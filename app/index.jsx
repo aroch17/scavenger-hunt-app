@@ -8,7 +8,7 @@ const Home = () => {
 	return (
 		<SafeAreaView className="bg-black h-full">
 			<ScrollView contentContainerStyle={{ height: "100%" }}>
-				<View className="bg-black h-full flex justify-center items-center">
+				<View className="bg-black w-full h-full flex justify-center items-center px-4">
 					<Text className="text-white text-3xl font-pbold mb-4">
 						Scavenger Hunt
 					</Text>
