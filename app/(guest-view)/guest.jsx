@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Alert } from 'react-native'
 import {React, useState} from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from '../../components/FormField';
@@ -14,6 +14,9 @@ const Guest = () => {
     if (form.answer === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
+		else {
+			Alert.alert("Answer was: " + form.answer)
+		}
 	}
 
   return (
@@ -32,13 +35,10 @@ const Guest = () => {
 					<CustomButton
 						title="Submit"
 						handlePress={submit}
-						containerStyles="mt-7"
+						containerStyles="mt-7 border-2 border-white"
 						isLoading={isSubmitting}
 					/>
 
-					<View className="flex justify-center pt-5 flex-row gap-2">
-						<Text classname="text-lg text-gray-100 font-pregular">Hello</Text>
-					</View>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
