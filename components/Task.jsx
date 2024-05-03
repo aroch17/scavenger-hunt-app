@@ -12,7 +12,7 @@ const Task = ({ title, taskType, handlePress, containerStyles, textStyles, isLoa
     >
 
       {taskType === "Text" && (
-        <View className="absolute mx-[15]">
+        <View className="absolute mx-4">
             <Image
               source={icons.bookmark}
               className="w-6 h-6"
