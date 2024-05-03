@@ -1,6 +1,8 @@
 import { Redirect, Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 
+
+
 const TabIcon = ({ icon, color, name, focused }) => {
 	return (
 		<View className="flex items-center justify-center gap-2">
