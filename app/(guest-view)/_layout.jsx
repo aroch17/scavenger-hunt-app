@@ -1,6 +1,6 @@
 import { Redirect, Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
-
+import { icons } from "../../constants";
 
 
 const TabIcon = ({ icon, color, name, focused }) => {
@@ -34,7 +34,7 @@ const GuestLayout = () => {
 						backgroundColor: "#161622",
 						borderTopWidth: 1,
 						borderTopColor: "#232533",
-						height: 84,
+						height: 104,
 					},
 				}}
 			>
@@ -45,24 +45,9 @@ const GuestLayout = () => {
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<TabIcon
-								// icon={icons.home}
+								icon={icons.home}
 								color={color}
 								name="Home"
-								focused={focused}
-							/>
-						),
-					}}
-				/>
-				<Tabs.Screen
-					name="profile"
-					options={{
-						title: "Profile",
-						headerShown: false,
-						tabBarIcon: ({ color, focused }) => (
-							<TabIcon
-								// icon={icons.bookmark}
-								color={color}
-								name="Profile"
 								focused={focused}
 							/>
 						),
@@ -76,7 +61,7 @@ const GuestLayout = () => {
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<TabIcon
-								// icon={icons.plus}
+								icon={icons.bookmark}
 								color={color}
 								name="Tasks"
 								focused={focused}
@@ -92,9 +77,25 @@ const GuestLayout = () => {
 						headerShown: false,
 						tabBarIcon: ({ color, focused }) => (
 							<TabIcon
-								// icon={icons.profile}
+								icon={icons.plus}
 								color={color}
 								name="Submissions"
+								focused={focused}
+							/>
+						),
+					}}
+				/>
+
+				<Tabs.Screen
+					name="profile"
+					options={{
+						title: "Profile",
+						headerShown: false,
+						tabBarIcon: ({ color, focused }) => (
+							<TabIcon
+								icon={icons.profile}
+								color={color}
+								name="Profile"
 								focused={focused}
 							/>
 						),
