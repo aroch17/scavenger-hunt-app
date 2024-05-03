@@ -28,7 +28,7 @@ const Home = () => {
 								</TouchableOpacity>
 								<TouchableOpacity
 									onPress={() => {
-										router.push("/home");
+										router.push("/guest-home");
 									}}
 									activeOpacity={0.7}
 									className="bg-white p-[10px]"
