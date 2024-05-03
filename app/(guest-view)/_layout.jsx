@@ -87,7 +87,7 @@ const GuestLayout = () => {
 				/>
 
 				<Tabs.Screen
-					name="profile"
+					name="guest-profile"
 					options={{
 						title: "Profile",
 						headerShown: false,
