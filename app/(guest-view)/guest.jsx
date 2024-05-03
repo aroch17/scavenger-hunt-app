@@ -1,17 +1,48 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, ScrollView, Alert } from 'react-native'
+import {React, useState} from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
+import FormField from '../../components/FormField';
+import CustomButton from '../../components/CustomButton';
 
 const Guest = () => {
-	return (
-		<SafeAreaView className="bg-black h-full">
-			<View className="bg-black h-full items-center">
-				<Text className="text-white text-2xl font-pbold mt-20">Available Questions: </Text>
-			</View>
-			<StatusBar style="light"/>
+	const [isSubmitting, setSubmitting] = useState(false);
+	const [form, setForm] = useState({
+		answer: '',
+	});
+
+	const submit = async () => {
+    if (form.answer === "") {
+      Alert.alert("Error", "Please fill in all fields");
+    }
+		else {
+			Alert.alert("Answer was: " + form.answer)
+		}
+	}
+
+  return (
+    <SafeAreaView className="bg-black h-full">
+			<ScrollView>
+				<View className="w-full justify-center min-h-[85vh] px-4 my-6">
+					<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">Guest</Text>
+					<FormField 
+						title="Put answer here: "
+						value={form.answer}
+						handleChangeText ={(e) => setForm({ ...form, 
+						answer: e})}
+						otherStyles="mt-7"
+					/>
+
+					<CustomButton
+						title="Submit"
+						handlePress={submit}
+						containerStyles="mt-7 border-2 border-white"
+						isLoading={isSubmitting}
+					/>
+
+				</View>
+			</ScrollView>
 		</SafeAreaView>
-	)
+  )
 }
 
 export default Guest
