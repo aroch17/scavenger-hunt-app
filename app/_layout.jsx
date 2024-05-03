@@ -3,6 +3,7 @@ import { useFonts } from "expo-font";
 import React from "react";
 import { SplashScreen, Stack } from "expo-router";
 import { GlobalProvider } from "../context/GlobalProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -35,16 +36,20 @@ export default function App() {
 		return null;
 	}
 
+	const queryClient = new QueryClient();
+
 	return (
-		<GlobalProvider>
-			<Stack>
-				<Stack.Screen name="index" options={{ headerShown: false }} />
-				<Stack.Screen name="(auth)" options={{ headerShown: false }} />
-				<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
-				<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
-				<Stack.Screen name="home" options={{ headerShown: false }} />
-				<Stack.Screen name="profile" options={{ headerShown: false }} />
-			</Stack>
-		</GlobalProvider>
+		<QueryClientProvider client={queryClient}>
+			<GlobalProvider>
+				<Stack>
+					<Stack.Screen name="index" options={{ headerShown: false }} />
+					<Stack.Screen name="(auth)" options={{ headerShown: false }} />
+					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
+					<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
+					<Stack.Screen name="home" options={{ headerShown: false }} />
+					<Stack.Screen name="profile" options={{ headerShown: false }} />
+				</Stack>
+			</GlobalProvider>
+		</QueryClientProvider>
 	);
 }
