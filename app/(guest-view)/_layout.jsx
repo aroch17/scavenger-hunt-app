@@ -39,7 +39,7 @@ const GuestLayout = () => {
 				}}
 			>
 				<Tabs.Screen
-					name="home"
+					name="guest-home"
 					options={{
 						title: "Home",
 						headerShown: false,
