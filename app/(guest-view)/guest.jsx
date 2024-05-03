@@ -23,9 +23,9 @@ const Guest = () => {
     <SafeAreaView className="bg-black h-full">
 			<ScrollView>
 				<View className="w-full justify-center min-h-[85vh] px-4 my-6">
-					<Text className="text-2xl font-semibold text-white mt-10 font-psemibold w-full text-center">Guest</Text>
+					<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">Guest</Text>
 					<FormField 
-						title="Put Answer Here"
+						title="Put answer here: "
 						value={form.answer}
 						handleChangeText ={(e) => setForm({ ...form, 
 						answer: e})}
