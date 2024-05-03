@@ -19,7 +19,7 @@ const Home = () => {
 							<View className="flex flex-row gap-3">
 								<TouchableOpacity
 									onPress={() => {
-										router.replace("/sign-in");
+										router.push("/sign-in");
 									}}
 									activeOpacity={0.7}
 									className="bg-white p-[10px]"
