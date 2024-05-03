@@ -1,15 +1,12 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text } from 'react-native'
+import React from 'react'
 
 const Host = () => {
 	return (
-		<SafeAreaView className="bg-black h-full">
-			<View>
-				<Text className="text-white">Host</Text>
-			</View>
-		</SafeAreaView>
-	);
-};
+		<View>
+			<Text>Host</Text>
+		</View>
+	)
+}
 
-export default Host;
+export default Host

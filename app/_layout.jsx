@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import { SplashScreen, Stack } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { GlobalProvider } from "../context/GlobalProvider";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
 	const [fontsLoaded, error] = useFonts({
@@ -36,10 +36,15 @@ export default function App() {
 	}
 
 	return (
-		<Stack>
-			<Stack.Screen name="index" options={{ headerShown: false}}/>
-			<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
-			<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
-		</Stack>
+		<GlobalProvider>
+			<Stack>
+				<Stack.Screen name="index" options={{ headerShown: false }} />
+				<Stack.Screen name="(auth)" options={{ headerShown: false }} />
+				<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
+				<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
+				<Stack.Screen name="home" options={{ headerShown: false }} />
+				<Stack.Screen name="profile" options={{ headerShown: false }} />
+			</Stack>
+		</GlobalProvider>
 	);
 }
