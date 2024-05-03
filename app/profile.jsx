@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { signOutUser } from "../lib/supabase";
 import { useGlobalContext } from "../context/GlobalProvider";
+import { StatusBar } from "expo-status-bar";
 
 const Profile = () => {
 	const { username, isLoading } = useGlobalContext();
@@ -33,6 +34,7 @@ const Profile = () => {
 							<Text className="font-pregular">Sign Out</Text>
 						</TouchableOpacity>
 					</View>
+					<StatusBar style="light" />
 				</SafeAreaView>
 			)}
 		</>

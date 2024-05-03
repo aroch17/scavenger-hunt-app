@@ -5,6 +5,7 @@ import { getCurrentUserDetails, signInUser } from "../../lib/supabase";
 import { router } from "expo-router";
 import { supabase } from "../../lib/supabase";
 import { useGlobalContext } from "../../context/GlobalProvider";
+import { StatusBar } from "expo-status-bar";
 
 const SignIn = () => {
 	const { setUsername } = useGlobalContext();
@@ -28,7 +29,6 @@ const SignIn = () => {
 		const { data: signInData, error } = await signInUser(email, password);
 		if (error) {
 			alert(error, [{text: "Ok"}])
-			throw error
 		}
 		if (signInData) {
 			const { data: userDetailsData, error } = await getCurrentUserDetails(signInData.session.user);
@@ -81,6 +81,7 @@ const SignIn = () => {
 					<Text className="font-pregular">Sign In</Text>
 				</TouchableOpacity>
 			</View>
+			<StatusBar style="light" />
 		</SafeAreaView>
 	);
 };
