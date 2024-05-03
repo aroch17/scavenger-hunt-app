@@ -22,7 +22,7 @@ const Guest = () => {
 				<View className="w-full justify-center min-h-[85vh] px-4 my-6">
 					<Text className="text-2xl font-semibold text-white mt-10 font-psemibold w-full text-center">Guest</Text>
 					<FormField 
-						title="Answer skvubsvjsbvjsbvksjbvkjasbvkjbvjkbsvkjsbkjvbskjvbkjvbsdkjvbksjbvksjbvkjsdb"
+						title="Put Answer Here"
 						value={form.answer}
 						handleChangeText ={(e) => setForm({ ...form, 
 						answer: e})}
@@ -31,7 +31,7 @@ const Guest = () => {
 
 					<CustomButton
 						title="Submit"
-						handlepress={submit}
+						handlePress={submit}
 						containerStyles="mt-7"
 						isLoading={isSubmitting}
 					/>
