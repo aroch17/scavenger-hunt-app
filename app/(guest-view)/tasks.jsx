@@ -11,7 +11,7 @@ const tasks = () => {
 	const [isSubmitting, setSubmitting] = useState(false);
 	const select = (task) => {
 		// Alert.alert("Error", `${qa.id}`);
-		router.push("/task-view");
+		router.push({pathname: `/task/${task.id}`, params: task});
 	};
 	const {
 		data: queryData,
