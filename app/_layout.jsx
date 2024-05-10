@@ -4,6 +4,7 @@ import React from "react";
 import { SplashScreen, Stack } from "expo-router";
 import { GlobalProvider } from "../context/GlobalProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "react-native-reanimated"
 
 SplashScreen.preventAutoHideAsync();
 
