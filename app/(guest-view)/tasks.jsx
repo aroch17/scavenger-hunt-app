@@ -5,16 +5,13 @@ import CustomButton from '../../components/CustomButton';
 import Task from '../../components/Task';
 import { useQuery } from "@tanstack/react-query";
 import { getQuestions } from "../../lib/supabase";
+import { router } from "expo-router";
 
 const tasks = () => {
   const [isSubmitting, setSubmitting] = useState(false);
-  const submit = async () => {
-    if (form.answer === "") {
-      Alert.alert("Error", "Please fill in all fields");
-    }
-		else {
-			Alert.alert("Answer was: " + form.answer)
-		}
+  const select = (qa) => {
+    Alert.alert("Error", `${qa.id}`);
+    router.push("/task-view");
 	}
   const {
 		data: queryData,
@@ -35,7 +32,7 @@ const tasks = () => {
               <Task
                 key={qa.id}
                 title={qa.data.question}
-                handlePress={submit}
+                handlePress={() => select(qa)}
                 containerStyles="mt-7 border-2 border-white"
                 isLoading={isSubmitting}
                 taskType="Text"
