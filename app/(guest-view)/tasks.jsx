@@ -10,7 +10,7 @@ import { router } from "expo-router";
 const tasks = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const select = (qa) => {
-    Alert.alert("Error", `${qa.id}`);
+    // Alert.alert("Error", `${qa.id}`);
     router.push("/task-view");
 	}
   const {
