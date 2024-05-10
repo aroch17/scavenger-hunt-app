@@ -17,8 +17,10 @@ const Host = () => {
 	});
 
 	const [form, setForm] = useState({
-		question: "",
+		title: "",
+		prompt: "",
 		answer: "",
+		taskType: "",
 	});
 
 	return (
@@ -28,22 +30,31 @@ const Host = () => {
 					Add Question
 				</Text>
 				<FormField
-					title="Question"
-					handleChangeText={(e) => setForm({ ...form, question: e })}
+					title="Title"
+					handleChangeText={(e) => setForm({ ...form, title: e })}
+				/>
+				<FormField
+					title="Prompt"
+					handleChangeText={(e) => setForm({ ...form, prompt: e })}
 				/>
 				<FormField
 					title="Answer"
 					handleChangeText={(e) => setForm({ ...form, answer: e })}
+				/>
+				<FormField
+					title="Type"
+					handleChangeText={(e) => setForm({ ...form, taskType: e })}
 				/>
 				<CustomButton
 					title="Add"
 					containerStyles="mt-7 border-2 border-white w-full"
 					handlePress={() => {
 						mutation.mutate({
-							data: {
-								question: form.question,
-								answer: form.answer,
-							},
+							title: form.title,
+							prompt: form.prompt,
+							answer: form.answer,
+							task_type: form.taskType,
+							hunt_id: 1,
 						});
 					}}
 				/>
