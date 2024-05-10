@@ -22,7 +22,7 @@ const TaskViewer = () => {
 										key={qa.id}
 										className="text-white font-pregular text-xl"
 									>
-										{qa.data.question}
+										{qa.title}
 									</Text>
 								);
 							})}
