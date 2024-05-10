@@ -5,14 +5,14 @@ import { StatusBar } from "expo-status-bar";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { useMutation } from "@tanstack/react-query";
-import { addQuestion } from "../../lib/supabase";
+import { addTask } from "../../lib/supabase";
 
 const Host = () => {
 	const mutation = useMutation({
-		mutationFn: addQuestion,
+		mutationFn: addTask,
 		onSuccess: () => {
 			// Invalidate and refetch
-			queryClient.invalidateQueries({ queryKey: ["questions"] });
+			queryClient.invalidateQueries({ queryKey: ["tasks"] });
 		},
 	});
 
