@@ -40,6 +40,7 @@ const SignIn = () => {
 				setUsername(username);
 			}
 		}
+		router.dismiss()
 		router.replace("/profile");
 	};
 
