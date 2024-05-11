@@ -29,6 +29,7 @@ const viewTask = () => {
 					<ScrollView contentContainerStyle={{ height: "100%" }}>
 						<View>
 							<DisplayTask
+								id = {task.id}
 								title={task.title}
 								prompt={task.prompt}
 								answer={task.answer}
