@@ -41,7 +41,7 @@ const SignIn = () => {
 			}
 		}
 		router.dismiss()
-		router.replace("/profile");
+		router.replace("/hunts");
 	};
 
 	return (
