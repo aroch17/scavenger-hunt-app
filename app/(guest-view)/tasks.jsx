@@ -10,8 +10,7 @@ import { router } from "expo-router";
 const tasks = () => {
 	const [isSubmitting, setSubmitting] = useState(false);
 	const select = (task) => {
-		// Alert.alert("Error", `${qa.id}`);
-		router.push({pathname: `/task/${task.id}`, params: task});
+		router.push(`/task/${task.id}`);
 	};
 	const {
 		data: queryData,
