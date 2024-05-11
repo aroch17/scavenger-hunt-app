@@ -16,7 +16,7 @@ const Profile = () => {
 						<Text className="text-white">Hello {username}!</Text>
 						<TouchableOpacity
 							onPress={() => {
-								router.push("/host");
+								router.push("/hunt-builder");
 							}}
 							activeOpacity={0.7}
 							className="bg-white p-[10px] w-full flex flex-row justify-center"
