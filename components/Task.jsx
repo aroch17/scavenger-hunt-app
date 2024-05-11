@@ -27,9 +27,6 @@ const Task = ({ title, taskType, handlePress, containerStyles, textStyles, isLoa
           {title}
         </Text>
       </View>
-
-
-
     </TouchableOpacity>
   )
 }

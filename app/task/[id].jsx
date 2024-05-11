@@ -20,8 +20,6 @@ const viewTask = () => {
 		task = data.data[0]
 	}
 
-	console.log(task)
-
 	return (
 		<>
 			{!isLoading && (
