@@ -7,14 +7,20 @@ import { useQuery } from "@tanstack/react-query";
 import { getTask } from "../../lib/supabase";
 
 const viewTask = () => {
-	const taskId = useLocalSearchParams();
-
+	const {id: taskId} = useLocalSearchParams();
+	let task = null
+	
+	// should consider implementing a cache for this
 	const { data, isLoading, error } = useQuery({
-		queryKey: ["tasks"],
+		queryKey: ["task"],
 		queryFn: () => getTask(taskId),
 	});
 
-	const task = data.data[0];
+	if (!isLoading && !error) {
+		task = data.data[0]
+	}
+
+	console.log(task)
 
 	return (
 		<>
