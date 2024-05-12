@@ -48,6 +48,7 @@ const GuestLayout = () => {
 					options={{
 						title: "Home",
 						headerShown: false,
+						unmountOnBlur: true,
 						tabBarIcon: ({ color, focused }) => (
 							<TabIcon
 								icon={icons.home}
@@ -64,6 +65,7 @@ const GuestLayout = () => {
 					options={{
 						title: "Tasks",
 						headerShown: false,
+						unmountOnBlur: true,
 						tabBarIcon: ({ color, focused }) => (
 							<TabIcon
 								icon={icons.bookmark}
@@ -80,6 +82,7 @@ const GuestLayout = () => {
 					options={{
 						title: "Submissions",
 						headerShown: false,
+						unmountOnBlur: true,
 						tabBarIcon: ({ color, focused }) => (
 							<TabIcon
 								icon={icons.plus}
@@ -96,6 +99,7 @@ const GuestLayout = () => {
 					options={{
 						title: "Profile",
 						headerShown: false,
+						unmountOnBlur: true,
 						tabBarIcon: ({ color, focused }) => (
 							<TabIcon
 								icon={icons.profile}

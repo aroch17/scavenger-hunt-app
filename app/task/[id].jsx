@@ -20,8 +20,6 @@ const viewTask = () => {
 		task = data.data[0]
 	}
 
-	console.log(task)
-
 	return (
 		<>
 			{!isLoading && (
@@ -29,6 +27,7 @@ const viewTask = () => {
 					<ScrollView contentContainerStyle={{ height: "100%" }}>
 						<View>
 							<DisplayTask
+								id = {task.id}
 								title={task.title}
 								prompt={task.prompt}
 								answer={task.answer}
