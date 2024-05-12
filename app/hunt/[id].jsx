@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getHunt } from "../../lib/supabase";
 
 const HuntScreen = () => {
-	const { hunt:huntId } = useLocalSearchParams();
+	const { id:huntId } = useLocalSearchParams();
   let hunt = null
 
 	const { data, isLoading, error } = useQuery({
