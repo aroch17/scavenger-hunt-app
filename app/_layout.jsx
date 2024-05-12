@@ -48,8 +48,8 @@ export default function App() {
 					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
 					<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
 					<Stack.Screen name="task" options={{ headerShown: false }} />
+					<Stack.Screen name="hunt" options={{ headerShown: false }} />
 					<Stack.Screen name="home" options={{ headerShown: false }} />
-					<Stack.Screen name="profile" options={{ headerShown: false }} />
 				</Stack>
 			</GlobalProvider>
 		</QueryClientProvider>
