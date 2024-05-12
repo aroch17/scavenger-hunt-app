@@ -2,12 +2,12 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
-import { signOutUser } from "../lib/supabase";
-import { useGlobalContext } from "../context/GlobalProvider";
+import { signOutUser } from "../../lib/supabase";
+import { useGlobalContext } from "../../context/GlobalProvider";
 import { StatusBar } from "expo-status-bar";
 
 const Profile = () => {
-	const { username, isLoading } = useGlobalContext();
+	const { username, isLoading, setUser } = useGlobalContext();
 	return (
 		<>
 			{!isLoading && (
@@ -16,7 +16,7 @@ const Profile = () => {
 						<Text className="text-white">Hello {username}!</Text>
 						<TouchableOpacity
 							onPress={() => {
-								router.push("/host");
+								router.push("/hunt-builder");
 							}}
 							activeOpacity={0.7}
 							className="bg-white p-[10px] w-full flex flex-row justify-center"
@@ -25,7 +25,7 @@ const Profile = () => {
 						</TouchableOpacity>
 						<TouchableOpacity
 							onPress={() => {
-								signOutUser();
+								setUser(null);
 								router.replace("/home");
 							}}
 							activeOpacity={0.7}

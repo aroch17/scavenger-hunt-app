@@ -8,7 +8,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { StatusBar } from "expo-status-bar";
 
 const SignIn = () => {
-	const { setUsername } = useGlobalContext();
+	const { setUsername, setUser } = useGlobalContext();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -28,20 +28,23 @@ const SignIn = () => {
 	const signIn = async (email, password) => {
 		const { data: signInData, error } = await signInUser(email, password);
 		if (error) {
-			alert(error, [{text: "Ok"}])
+			alert(error, [{ text: "Ok" }]);
 		}
 		if (signInData) {
-			const { data: userDetailsData, error } = await getCurrentUserDetails(signInData.session.user);
+			setUser(signInData.session.user);
+			const { data: userDetailsData, error } = await getCurrentUserDetails(
+				signInData.session.user
+			);
 			if (error) {
-				console.log(error.message)
+				console.log(error.message);
 			}
 			if (userDetailsData) {
 				const { username } = userDetailsData;
 				setUsername(username);
 			}
 		}
-		router.dismiss()
-		router.replace("/profile");
+		router.dismiss();
+		router.replace("/hunts");
 	};
 
 	return (

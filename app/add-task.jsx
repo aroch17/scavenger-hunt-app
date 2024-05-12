@@ -2,10 +2,10 @@ import { View, Text } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import FormField from "../../components/FormField";
-import CustomButton from "../../components/CustomButton";
+import FormField from "../components/FormField";
+import CustomButton from "../components/CustomButton";
 import { useMutation } from "@tanstack/react-query";
-import { addTask } from "../../lib/supabase";
+import { addTask } from "../lib/supabase";
 
 const Host = () => {
 	const mutation = useMutation({
