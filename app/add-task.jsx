@@ -6,15 +6,18 @@ import FormField from "../components/FormField";
 import CustomButton from "../components/CustomButton";
 import { useMutation } from "@tanstack/react-query";
 import { addTask } from "../lib/supabase";
+import { useLocalSearchParams, router } from "expo-router";
 
 const Host = () => {
 	const mutation = useMutation({
 		mutationFn: addTask,
 		onSuccess: () => {
 			// Invalidate and refetch
-			queryClient.invalidateQueries({ queryKey: ["tasks"] });
+			queryClient.invalidateQueries({ queryKey: ["tasks", "hunt"] });
 		},
 	});
+
+	const { huntId } = useLocalSearchParams()
 
 	const [form, setForm] = useState({
 		title: "",
@@ -54,8 +57,9 @@ const Host = () => {
 							prompt: form.prompt,
 							answer: form.answer,
 							task_type: form.taskType,
-							hunt_id: 1,
+							hunt_id: huntId,
 						});
+						router.push("../")
 					}}
 				/>
 			</View>
