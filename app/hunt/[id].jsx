@@ -20,7 +20,6 @@ const HuntScreen = () => {
 		hunt = data.data[0];
 	}
 
-	// TODO: Add option to add tasks
 	return (
 		<>
 			{!isLoading && (
@@ -52,7 +51,7 @@ const HuntScreen = () => {
 							containerStyles="mt-7 bg-white w-full"
 							textStyles="text-black"
 							handlePress={() => {
-								router.push({pathname:"/add-task", params:{huntId: huntId}});
+								router.replace({pathname:"/add-task", params:{huntId: huntId}});
 							}}
 						/>
 					</View>

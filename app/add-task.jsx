@@ -17,7 +17,7 @@ const Host = () => {
 		},
 	});
 
-	const { huntId } = useLocalSearchParams()
+	const { huntId } = useLocalSearchParams();
 
 	const [form, setForm] = useState({
 		title: "",
@@ -59,7 +59,9 @@ const Host = () => {
 							task_type: form.taskType,
 							hunt_id: huntId,
 						});
-						router.push("../")
+						{
+							!mutation.isPending && router.replace(`/hunt/${huntId}`)
+						}
 					}}
 				/>
 			</View>
