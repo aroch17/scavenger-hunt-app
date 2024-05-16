@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React, { useState } from "react";
-import FormField from "../../components/FormField";
+import FormField from "../components/FormField";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomButton from "../../components/CustomButton";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { addHunt, getHuntByName } from "../../lib/supabase";
-import { router, useLocalSearchParams } from "expo-router";
-import { useGlobalContext } from "../../context/GlobalProvider";
+import CustomButton from "../components/CustomButton";
+import { useMutation } from "@tanstack/react-query";
+import { addHunt } from "../lib/supabase";
+import { router } from "expo-router";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 const HuntBuilder = () => {
   const mutation = useMutation({
@@ -19,7 +19,8 @@ const HuntBuilder = () => {
 	});
 
   const [form, setForm] = useState({
-		name: ""
+		name: "",
+    description: ""
 	});
 
   const { user } = useGlobalContext()
@@ -32,7 +33,13 @@ const HuntBuilder = () => {
 				</Text>
         <FormField 
           title="Hunt Name"
+          otherStyles="mb-7"
           handleChangeText={(e) => setForm({ ...form, name: e })}
+        />
+        {/* TODO: make description field taller and align text to top */}
+        <FormField 
+          title="Description"
+          handleChangeText={(e) => setForm({ ...form, description: e })}
         />
         <CustomButton 
           title="Add Hunt"
@@ -40,6 +47,7 @@ const HuntBuilder = () => {
           handlePress={() => {
             mutation.mutate({
 							name: form.name,
+              description: form.description,
               creator_id: user.id
 						});
           }}

@@ -31,7 +31,7 @@ const Home = () => {
 								textStyles="text-black text-[16rem]"
 								handlePress={() => {
 									if (!isLoggedIn) router.push("/sign-in")
-									else router.push("hunt-builder")
+									else router.push("hunts")
 								}}
 							/>
 						</View>

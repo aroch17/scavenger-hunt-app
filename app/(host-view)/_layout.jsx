@@ -53,21 +53,6 @@ const HostLayout = () => {
 				}}
 			/>
 			<Tabs.Screen
-				name="hunt-builder"
-				options={{
-					title: "Hunt Builder",
-					headerShown: false,
-					tabBarIcon: ({ color, focused }) => (
-						<TabIcon
-							icon={icons.home}
-							color={color}
-							name="Hunt Builder"
-							focused={focused}
-						/>
-					),
-				}}
-			/>
-			<Tabs.Screen
 				name="profile"
 				options={{
 					title: "Profile",
