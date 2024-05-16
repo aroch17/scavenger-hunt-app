@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { StatusBar } from "expo-status-bar";
 
 const Profile = () => {
-	const { username, isLoading, setUser } = useGlobalContext();
+	const { username, isLoading, setUser, setIsLoggedIn } = useGlobalContext();
 	return (
 		<>
 			{!isLoading && (
@@ -26,6 +26,7 @@ const Profile = () => {
 						<TouchableOpacity
 							onPress={() => {
 								signOutUser()
+								setIsLoggedIn(false)
 								setUser(null);
 								router.replace("/home");
 							}}
