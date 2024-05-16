@@ -51,6 +51,7 @@ export default function App() {
 					<Stack.Screen name="task" options={{ headerShown: false }} />
 					<Stack.Screen name="hunt" options={{ headerShown: false }} />
 					<Stack.Screen name="home" options={{ headerShown: false }} />
+					<Stack.Screen name="hunt-builder" options={{ headerShown: false }} />
 				</Stack>
 			</GlobalProvider>
 		</QueryClientProvider>
