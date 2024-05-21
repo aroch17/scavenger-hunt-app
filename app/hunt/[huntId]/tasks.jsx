@@ -7,9 +7,8 @@ import CustomButton from "../../../components/CustomButton";
 import { useHuntContext } from "./_layout";
 
 
-const Hunt = () => {
-  const { huntId } = useLocalSearchParams()
-  const { hunt, isLoading } = useHuntContext()
+const HuntTasks = () => {
+  const { huntId, hunt, isLoading } = useHuntContext()
 
   return (
     <>
@@ -52,4 +51,4 @@ const Hunt = () => {
   )
 }
 
-export default Hunt
+export default HuntTasks
