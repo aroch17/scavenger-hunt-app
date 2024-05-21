@@ -13,7 +13,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
 				source={icon}
 				resizeMode="contain"
 				tintColor={color}
-				className="w-6 h-6"
+				className="w-5 h-5"
 			/>
 			<Text
 				className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
@@ -48,7 +48,7 @@ const HuntLayout = () => {
 	return (
 		<>
 			{!isLoading && (
-				<Context.Provider value={{ hunt, isLoading }}>
+				<Context.Provider value={{ huntId, hunt, isLoading }}>
 					<Tabs
 						screenOptions={{
 							tabBarActiveTintColor: "#FFA001",
@@ -63,8 +63,22 @@ const HuntLayout = () => {
 						}}
 					>
 						<Tabs.Screen
+							name="home"
+							options={{
+								title: "Home",
+								headerShown: false,
+								tabBarIcon: ({ color, focused }) => (
+									<TabIcon
+										icon={icons.home}
+										color={color}
+										name="Home"
+										focused={focused}
+									/>
+								),
+							}}
+						/>
+						<Tabs.Screen
 							name="tasks"
-							initialParams={{ huntId: huntId }}
 							options={{
 								title: "tasks",
 								headerShown: false,
@@ -80,15 +94,15 @@ const HuntLayout = () => {
 							}}
 						/>
 						<Tabs.Screen
-							name="teams"
+							name="announce"
 							options={{
-								title: "teams",
+								title: "announcements",
 								headerShown: false,
 								tabBarIcon: ({ color, focused }) => (
 									<TabIcon
 										icon={icons.home}
 										color={color}
-										name="Teams"
+										name="Notice"
 										focused={focused}
 									/>
 								),
@@ -103,22 +117,22 @@ const HuntLayout = () => {
 									<TabIcon
 										icon={icons.home}
 										color={color}
-										name="Leaderboard"
+										name="Leaders"
 										focused={focused}
 									/>
 								),
 							}}
 						/>
 						<Tabs.Screen
-							name="announce"
+							name="teams"
 							options={{
-								title: "announcements",
+								title: "teams",
 								headerShown: false,
 								tabBarIcon: ({ color, focused }) => (
 									<TabIcon
 										icon={icons.home}
 										color={color}
-										name="Announce"
+										name="Teams"
 										focused={focused}
 									/>
 								),
