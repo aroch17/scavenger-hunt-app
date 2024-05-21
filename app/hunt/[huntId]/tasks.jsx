@@ -2,24 +2,14 @@ import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, router } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
-import { getHunt } from "../../../lib/supabase";
 import Task from "../../../components/Task";
 import CustomButton from "../../../components/CustomButton";
+import { useHuntContext } from "./_layout";
 
 
 const Hunt = () => {
   const { huntId } = useLocalSearchParams()
-  let hunt = null;
-
-	const { data, isLoading, error } = useQuery({
-		queryKey: ["hunt"],
-		queryFn: () => getHunt(huntId),
-	});
-
-	if (!isLoading) {
-		hunt = data.data[0];
-	}
+  const { hunt, isLoading } = useHuntContext()
 
   return (
     <>
