@@ -1,9 +1,7 @@
 import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useLocalSearchParams, router } from "expo-router";
 import Task from "../../../components/Task";
-import CustomButton from "../../../components/CustomButton";
 import { useHuntContext } from "./_layout";
 
 
