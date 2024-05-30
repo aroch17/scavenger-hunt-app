@@ -1,27 +1,17 @@
-import { View, Text, ScrollView, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, router } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
-import { getHunt } from "../../lib/supabase";
-import Task from "../../components/Task";
-import CustomButton from "../../components/CustomButton";
+import Task from "../../../components/Task";
+import CustomButton from "../../../components/CustomButton";
+import { useHuntContext } from "./_layout";
 
-const HuntScreen = () => {
-	const { id: huntId } = useLocalSearchParams();
-	let hunt = null;
 
-	const { data, isLoading, error } = useQuery({
-		queryKey: ["hunt"],
-		queryFn: () => getHunt(huntId),
-	});
+const HuntTasks = () => {
+  const { huntId, hunt, isLoading } = useHuntContext()
 
-	if (!isLoading) {
-		hunt = data.data[0];
-	}
-
-	return (
-		<>
+  return (
+    <>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
 					<View className="bg-black items-center">
@@ -58,7 +48,7 @@ const HuntScreen = () => {
 				</SafeAreaView>
 			)}
 		</>
-	);
-};
+  )
+}
 
-export default HuntScreen;
+export default HuntTasks

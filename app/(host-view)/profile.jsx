@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { StatusBar } from "expo-status-bar";
 
 const Profile = () => {
-	const { username, isLoading, setUser } = useGlobalContext();
+	const { username, isLoading, setUser, setIsLoggedIn } = useGlobalContext();
 	return (
 		<>
 			{!isLoading && (
@@ -16,17 +16,10 @@ const Profile = () => {
 						<Text className="text-white">Hello {username}!</Text>
 						<TouchableOpacity
 							onPress={() => {
-								router.push("/hunts");
-							}}
-							activeOpacity={0.7}
-							className="bg-white p-[10px] w-full flex flex-row justify-center"
-						>
-							<Text className="font-pregular">Go to host view</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
 								signOutUser()
+								setIsLoggedIn(false)
 								setUser(null);
+								router.dismiss()
 								router.replace("/home");
 							}}
 							activeOpacity={0.7}
