@@ -24,6 +24,9 @@ const Home = () => {
 								title="Join a hunt"
 								containerStyles="mt-7 bg-white w-[80%] "
 								textStyles="text-black text-[16rem]"
+								handlePress={() => {
+									router.push("/choose-hunt")
+								}}
 							/>
 							<CustomButton
 								title="Create a hunt"

@@ -44,6 +44,8 @@ export default function App() {
 			<GlobalProvider>
 				<Stack>
 					<Stack.Screen name="add-task" options={{ headerShown: false }} />
+					<Stack.Screen name="choose-team" options={{ headerShown: false }} />
+					<Stack.Screen name="choose-hunt" options={{ headerShown: false }} />
 					<Stack.Screen name="index" options={{ headerShown: false }} />
 					<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
