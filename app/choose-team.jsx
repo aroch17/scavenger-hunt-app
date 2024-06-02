@@ -3,11 +3,13 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../components/FormField'
 import { useGlobalContext } from '../context/GlobalProvider'
-import { getTeams } from "../../lib/supabase";
+import { getTeams } from "../lib/supabase";
+import { useQuery } from '@tanstack/react-query'
+import { useLocalSearchParams } from 'expo-router'
 
 const chooseTeam = () => {
 
-  const { hunt } = useGlobalContext();
+  const { huntId } = useLocalSearchParams();
 
   const {
 		data: queryData,
@@ -15,8 +17,11 @@ const chooseTeam = () => {
 		error,
 	} = useQuery({
 		queryKey: ["userTeams"],
-		queryFn: () => getTeams(hunt.id),
+		queryFn: () => getTeams(huntId),
 	});
+
+  console.log(queryData)
+
 
   return (
     <SafeAreaView className="bg-black h-full">
