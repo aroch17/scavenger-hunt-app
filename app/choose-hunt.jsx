@@ -30,7 +30,7 @@ const chooseHunt = () => {
     }
 		else if (queryData.data.some(e => e.id === Number(form.answer))){
 			Alert.alert("Valid hunt code: " + form.answer)
-      router.push("/choose-team", {hunt_id: Number(form.answer)})
+      router.push({pathname: "/choose-team", params: {huntId: Number(form.answer)}})
 		}
     else{
       Alert.alert("Please enter a valid hunt code")
