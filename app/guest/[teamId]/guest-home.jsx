@@ -1,8 +1,8 @@
 import { View, Text, ScrollView, Alert } from 'react-native'
 import {React, useState} from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
-import FormField from '../../components/FormField';
-import CustomButton from '../../components/CustomButton';
+import FormField from '../../../components/FormField';
+import CustomButton from '../../../components/CustomButton';
 
 const Guest = () => {
 	const [isSubmitting, setSubmitting] = useState(false);
