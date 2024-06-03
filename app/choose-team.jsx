@@ -38,7 +38,11 @@ const chooseTeam = () => {
                     renderItem={({ item }) => (
                       <CustomButton
                         containerStyles="mt-7 border-2 border-white"
-                        title={item.name}>
+                        title={item.name}
+                        handlePress={() => {
+                          router.push(`/guest/${huntId}`);
+                        }}
+                        >
                       </CustomButton>
                     )}
                   />

@@ -29,7 +29,6 @@ const chooseHunt = () => {
       Alert.alert("Error", "Please fill in all fields");
     }
 		else if (queryData.data.some(e => e.id === Number(form.answer))){
-			Alert.alert("Valid hunt code: " + form.answer)
       router.push({pathname: "/choose-team", params: {huntId: Number(form.answer)}})
 		}
     else{
