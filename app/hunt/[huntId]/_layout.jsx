@@ -1,10 +1,10 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 import { icons } from "../../../constants";
 import { useQuery } from "@tanstack/react-query";
-import { getHunt } from "../../../lib/supabase";
+import { supabase, getHunt } from "../../../lib/supabase";
 
 const TabIcon = ({ icon, color, name, focused }) => {
 	return (
@@ -30,11 +30,23 @@ export const useHuntContext = () => useContext(Context);
 
 const HuntLayout = () => {
 	const { huntId } = useLocalSearchParams();
-	// TODO: fetch hunt data and add it to context for children screens to use
-	// so that it doesn't have to be fetched multiple times
-	// TODO: Make tab icons smaller
-
 	let hunt = null;
+
+	useEffect(() => {
+		const channel = supabase
+			.channel("custom")
+			.on(
+				"postgres_changes",
+				{
+					event: "*",
+					schema: "public",
+					table: "announcements",
+				},
+				(payload) => {
+				}
+			)
+			.subscribe();
+	}, []);
 
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["hunt"],
