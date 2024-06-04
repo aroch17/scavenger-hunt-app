@@ -43,8 +43,8 @@ export default function App() {
 		<QueryClientProvider client={queryClient}>
 			<GlobalProvider>
 				<Stack>
-					<Stack.Screen name="add-task" options={{ headerShown: false }} />
 					<Stack.Screen name="index" options={{ headerShown: false }} />
+					<Stack.Screen name="add-task" options={{ headerShown: false }} />
 					<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
 					<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
