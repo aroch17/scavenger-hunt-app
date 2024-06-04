@@ -15,7 +15,7 @@ const chooseTeam = () => {
 
   const { huntId, hunt, isLoading } = useHuntContext()
 
-  console.log(hunt)
+  const teamId = 1;
 
   return (
     <>
@@ -35,7 +35,7 @@ const chooseTeam = () => {
                         containerStyles="mt-7 border-2 border-white"
                         title={item.name}
                         handlePress={() => {
-                          router.push(`/guest/${huntId}`);
+                          router.push(`/guest/${huntId}/${item.id}`);
                         }}
                         >
                       </CustomButton>

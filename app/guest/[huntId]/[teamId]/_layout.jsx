@@ -1,10 +1,11 @@
-import React, { createContext, useContext } from "react";
-import { useLocalSearchParams } from "expo-router";
-import { Tabs } from "expo-router";
+import { Redirect, Tabs, useLocalSearchParams } from "expo-router";
 import { Image, Text, View } from "react-native";
-import { icons } from "../../../constants";
-import { useQuery } from "@tanstack/react-query";
-import { getHunt } from "../../../lib/supabase";
+import { icons } from "../../../../constants";
+import { SplashScreen, Stack } from "expo-router";
+import { GlobalProvider } from "../../../../context/GlobalProvider";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { createContext, useContext } from "react";
+import { getHunt, getTeam } from "../../../../lib/supabase";
 
 const TabIcon = ({ icon, color, name, focused }) => {
 	return (
@@ -13,7 +14,7 @@ const TabIcon = ({ icon, color, name, focused }) => {
 				source={icon}
 				resizeMode="contain"
 				tintColor={color}
-				className="w-5 h-5"
+				className="w-6 h-6"
 			/>
 			<Text
 				className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
@@ -25,27 +26,43 @@ const TabIcon = ({ icon, color, name, focused }) => {
 	);
 };
 
-const Context = createContext();
-export const useHuntContext = () => useContext(Context);
+const queryClient = new QueryClient();
 
-const HuntLayout = () => {
-	const { huntId } = useLocalSearchParams();
+const Context = createContext();
+export const useTeamContext = () => useContext(Context);
+
+const GuestLayout = () => {
+
+	const { huntId, teamId } = useLocalSearchParams();
 
 	let hunt = null;
 
-	const { data, isLoading, error } = useQuery({
+	const { data:huntData, isLoading: huntIsLoading, huntError } = useQuery({
 		queryKey: ["hunt"],
 		queryFn: () => getHunt(huntId),
 	});
 
-	if (!isLoading) {
-		hunt = data.data[0];
+	if (!huntIsLoading) {
+		hunt = huntData.data[0];
 	}
+
+	let team = null;
+
+	const { data:teamData, isLoading: teamIsLoading, teamError } = useQuery({
+		queryKey: ["team"],
+		queryFn: () => getTeam(teamId),
+	});
+
+	if (!teamIsLoading) {
+		team = teamData.data[0];
+	}
+	
+	const isLoading = huntIsLoading || teamIsLoading;
 
 	return (
 		<>
-			{!isLoading && (
-				<Context.Provider value={{ huntId, hunt, isLoading }}>
+		{!isLoading && (
+				<Context.Provider value={{ huntId, hunt, teamId, team, isLoading }}>
 					<Tabs
 						screenOptions={{
 							tabBarActiveTintColor: "#FFA001",
@@ -60,10 +77,11 @@ const HuntLayout = () => {
 						}}
 					>
 						<Tabs.Screen
-							name="home"
+							name="guest-home"
 							options={{
 								title: "Home",
 								headerShown: false,
+								unmountOnBlur: true,
 								tabBarIcon: ({ color, focused }) => (
 									<TabIcon
 										icon={icons.home}
@@ -74,15 +92,16 @@ const HuntLayout = () => {
 								),
 							}}
 						/>
+
 						<Tabs.Screen
 							name="tasks"
 							options={{
-								title: "tasks",
+								title: "Tasks",
 								headerShown: false,
 								unmountOnBlur: true,
 								tabBarIcon: ({ color, focused }) => (
 									<TabIcon
-										icon={icons.home}
+										icon={icons.bookmark}
 										color={color}
 										name="Tasks"
 										focused={focused}
@@ -90,56 +109,47 @@ const HuntLayout = () => {
 								),
 							}}
 						/>
+
 						<Tabs.Screen
-							name="announce"
+							name="submissions"
 							options={{
-								title: "announcements",
+								title: "Submissions",
 								headerShown: false,
+								unmountOnBlur: true,
 								tabBarIcon: ({ color, focused }) => (
 									<TabIcon
-										icon={icons.home}
+										icon={icons.plus}
 										color={color}
-										name="Notice"
+										name="Submissions"
 										focused={focused}
 									/>
 								),
 							}}
 						/>
+
 						<Tabs.Screen
-							name="leaderboard"
+							name="guest-profile"
 							options={{
-								title: "leaderboard",
+								title: "Profile",
 								headerShown: false,
+								unmountOnBlur: true,
 								tabBarIcon: ({ color, focused }) => (
 									<TabIcon
-										icon={icons.home}
+										icon={icons.profile}
 										color={color}
-										name="Leaders"
-										focused={focused}
-									/>
-								),
-							}}
-						/>
-						<Tabs.Screen
-							name="teams"
-							options={{
-								title: "teams",
-								headerShown: false,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
-										color={color}
-										name="Teams"
+										name="Profile"
 										focused={focused}
 									/>
 								),
 							}}
 						/>
 					</Tabs>
-				</Context.Provider>
+			</Context.Provider>
 			)}
 		</>
+
+		
 	);
 };
 
-export default HuntLayout;
+export default GuestLayout;

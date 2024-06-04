@@ -2,8 +2,8 @@ import { View, Text, ScrollView, Alert, FlatList } from "react-native";
 import { React, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQuery } from "@tanstack/react-query";
-import { getSubmissions } from "../../../lib/supabase";
-import Submission from "../../../components/Submission";
+import { getSubmissions } from "../../../../lib/supabase";
+import Submission from "../../../../components/Submission";
 
 const submissions = () => {
 	const {

@@ -49,7 +49,7 @@ export default function App() {
 					<Stack.Screen name="add-task" options={{ headerShown: false }} />
 					<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
-					<Stack.Screen name="guest/[teamId]" options={{ headerShown: false }} />
+					<Stack.Screen name="guest/[huntId]/[teamId]" options={{ headerShown: false }} />
 					<Stack.Screen name="task" options={{ headerShown: false }} />
 					<Stack.Screen name="hunt/[huntId]" options={{ headerShown: false }} />
 					<Stack.Screen name="home" options={{ headerShown: false }} />

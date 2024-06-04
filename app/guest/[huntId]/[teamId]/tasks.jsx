@@ -1,10 +1,10 @@
 import { View, Text, ScrollView, Alert } from "react-native";
 import { React, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CustomButton from "../../../components/CustomButton";
-import Task from "../../../components/Task";
+import CustomButton from "../../../../components/CustomButton";
+import Task from "../../../../components/Task";
 import { useQuery } from "@tanstack/react-query";
-import { getTasks } from "../../../lib/supabase";
+import { getTasks } from "../../../../lib/supabase";
 import { router } from "expo-router";
 
 const tasks = () => {

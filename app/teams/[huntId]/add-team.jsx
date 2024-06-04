@@ -15,7 +15,10 @@ const addATeam = () => {
 
   const mutation = useMutation({
 		mutationFn: addTeam,
-		onSuccess: () => {
+		onSuccess: (data) => {
+			const teamId = data.data[0].id;
+			router.push(`/guest/${huntId}/${teamId}`);
+
 			// Invalidate and refetch
 			queryClient.invalidateQueries({ queryKey: ["teams", "hunt"] });
 		},
@@ -39,13 +42,11 @@ const addATeam = () => {
 					title="Add"
 					containerStyles="mt-7 border-2 border-white w-full"
 					handlePress={() => {
+						console.log("Button pressed, starting mutation...");
 						mutation.mutate({
 							name: form.teamName,
 							hunt_id: huntId,
 						});
-						{
-							!mutation.isPending && router.push(`/guest/${huntId}`)
-						}
 					}}
 				/>
 			</View>
