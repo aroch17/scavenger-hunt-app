@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useMutation } from "@tanstack/react-query";
 import { addSubmission } from "../lib/supabase";
 
-const DisplayTask = ({ id, title, prompt, answer, taskType, otherStyles, textStyles, value, placeholder, handleChangeText}) => {
+const DisplayTask = ({ id, title, prompt, answer, taskType, huntId, otherStyles, textStyles, value, placeholder, handleChangeText}) => {
 
   const [isSubmitting, setSubmitting] = useState(false);
 	const [form, setForm] = useState({
@@ -23,7 +23,8 @@ const DisplayTask = ({ id, title, prompt, answer, taskType, otherStyles, textSty
       mutation.mutate({
         user_id: "0f52bbf5-175c-404b-9089-c3f54c981a3f",
         submission: form.answer,
-        task_id: id
+        task_id: id,
+        hunt_id: huntId
       });
 
 		}
