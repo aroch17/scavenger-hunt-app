@@ -2,13 +2,13 @@ import { View, Text } from 'react-native'
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import FormField from "../components/FormField";
-import CustomButton from "../components/CustomButton";
+import FormField from "../../../components/FormField";
+import CustomButton from "../../../components/CustomButton";
 import { useMutation } from "@tanstack/react-query";
-import { addTeam } from "../lib/supabase";
+import { addTeam } from "../../../lib/supabase";
 import { useLocalSearchParams, router } from "expo-router";
 
-const addATeam = () => {
+const addATeamOld = () => {
 
   const mutation = useMutation({
 		mutationFn: addTeam,
@@ -23,6 +23,7 @@ const addATeam = () => {
 	const [form, setForm] = useState({
 		teamName: "",
 	});
+
   return (
     <SafeAreaView className="bg-black h-full">
 			<View className="bg-black h-full items-center">
@@ -52,4 +53,4 @@ const addATeam = () => {
   )
 }
 
-export default addATeam
+export default addATeamOld
