@@ -77,16 +77,33 @@ const GuestLayout = () => {
 						}}
 					>
 						<Tabs.Screen
-							name="guest-home"
+							name="leaderboard"
 							options={{
-								title: "Home",
+								title: "Leaderboard",
 								headerShown: false,
 								unmountOnBlur: true,
 								tabBarIcon: ({ color, focused }) => (
 									<TabIcon
 										icon={icons.home}
 										color={color}
-										name="Home"
+										name="Leader"
+										focused={focused}
+									/>
+								),
+							}}
+						/>
+
+						<Tabs.Screen
+							name="announcements"
+							options={{
+								title: "Announcements",
+								headerShown: false,
+								unmountOnBlur: true,
+								tabBarIcon: ({ color, focused }) => (
+									<TabIcon
+										icon={icons.home}
+										color={color}
+										name="Announce"
 										focused={focused}
 									/>
 								),

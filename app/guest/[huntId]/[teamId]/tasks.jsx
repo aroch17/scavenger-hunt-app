@@ -6,17 +6,16 @@ import Task from "../../../../components/Task";
 import { useQuery } from "@tanstack/react-query";
 import { getTasks } from "../../../../lib/supabase";
 import { router } from "expo-router";
+import { useTeamContext } from "./_layout";
 
 const tasks = () => {
 	const [isSubmitting, setSubmitting] = useState(false);
 	const select = (task) => {
 		router.push(`/task/${task.id}`);
 	};
-	const {
-		data: queryData,
-		isLoading,
-		error,
-	} = useQuery({ queryKey: ["tasks"], queryFn: getTasks });
+
+	const { huntId, hunt, teamId, team, isLoading } = useTeamContext()
+
 
 	return (
 		<>
@@ -24,11 +23,7 @@ const tasks = () => {
 				<SafeAreaView className="bg-black h-full">
 					<ScrollView contentContainerStyle={{ height: "100%" }}>
 						<View className="w-full justify-center min-h-[85vh] px-4 my-6">
-							<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">
-								Guest
-							</Text>
-
-							{queryData.data.map((task) => {
+							{hunt.tasks.map((task) => {
 								return (
 									<Task
 										key={task.id}

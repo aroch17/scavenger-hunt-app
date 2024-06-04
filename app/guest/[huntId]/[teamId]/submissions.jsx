@@ -4,13 +4,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useQuery } from "@tanstack/react-query";
 import { getSubmissions } from "../../../../lib/supabase";
 import Submission from "../../../../components/Submission";
+import { useTeamContext } from "./_layout";
 
 const submissions = () => {
-	const {
-		data: queryData,
-		isLoading,
-		error,
-	} = useQuery({ queryKey: ["submissions"], queryFn: getSubmissions });
+	// const {
+	// 	data: queryData,
+	// 	isLoading,
+	// 	error,
+	// } = useQuery({ queryKey: ["submissions"], queryFn: getSubmissions });
+
+	const { huntId, hunt, teamId, team, isLoading } = useTeamContext()
 
 	return (
 		<>
@@ -20,7 +23,7 @@ const submissions = () => {
 						Your submissions:
 					</Text>
 					<View className="w-full px-4 my-6">
-						{queryData.data.length > 0 ? (
+						{hunt.submissions.length > 0 ? (
 							<FlatList
 								className="max-h-[95%]"
 								data={queryData.data}
@@ -38,7 +41,7 @@ const submissions = () => {
 							/>
 						) : (
 							<Text className="text-white font-pregular text-xl">
-								No hunts to display.
+								No submissions to display.
 							</Text>
 						)}
 					</View>
