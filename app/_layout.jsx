@@ -45,6 +45,7 @@ export default function App() {
 				<Stack>
 					<Stack.Screen name="index" options={{ headerShown: false }} />
 					<Stack.Screen name="add-task" options={{ headerShown: false }} />
+					<Stack.Screen name="add-announcement" options={{ headerShown: false }} />
 					<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
 					<Stack.Screen name="(guest-view)" options={{ headerShown: false }} />
