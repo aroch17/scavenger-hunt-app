@@ -23,6 +23,7 @@ const tasks = () => {
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
 					<View className="w-full px-4 my-6">
+						<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">Tasks:</Text>
 						{hunt.tasks.length > 0 ? (
 							<FlatList
 								className="min-h-[80%] max-h-[95%]"
