@@ -1,13 +1,37 @@
 import { View, Text, FlatList } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import Task from "../../../components/Task";
 import CustomButton from "../../../components/CustomButton";
+import { supabase } from "../../../lib/supabase";
 import { useHuntContext } from "./_layout";
 
 const HuntAnnouncements = () => {
 	const { huntId, hunt, isLoading } = useHuntContext();
+	const [announcements, setAnnouncements] = useState(hunt.announcements)
+	console.log(announcements)
+
+	useEffect(() => {
+		const channel = supabase
+			.channel("custom")
+			.on(
+				"postgres_changes",
+				{
+					event: "*",
+					schema: "public",
+					table: "announcements",
+				},
+				(payload) => {
+					const { new:newAnnouncement} = payload
+					if (!isLoading) {
+						console.log("updating")
+						setAnnouncements([...announcements, newAnnouncement])
+					}
+				}
+			)
+			.subscribe();
+	}, []);
 	
 	return (
 		<>
@@ -17,10 +41,10 @@ const HuntAnnouncements = () => {
 						<Text className="mt-5 font-bold text-white text-2xl mt-20">
 							Latest Updates:{" "}
 						</Text>
-						{hunt.announcements.length > 0 ? (
+						{announcements.length > 0 ? (
 							<FlatList
 								className="max-h-[60%]"
-								data={hunt.announcements}
+								data={announcements}
 								renderItem={({ item }) => (
 									<Task
 										key={item.id}

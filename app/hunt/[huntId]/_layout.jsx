@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { Tabs } from "expo-router";
-import { Image, Text, View } from "react-native";
+import { Alert, Image, Text, View } from "react-native";
 import { icons } from "../../../constants";
 import { useQuery } from "@tanstack/react-query";
 import { getHunt, supabase } from "../../../lib/supabase";
@@ -31,23 +31,8 @@ export const useHuntContext = () => useContext(Context);
 
 const HuntLayout = () => {
 	const { huntId } = useLocalSearchParams();
-	let hunt = null;
 
-	useEffect(() => {
-		const channel = supabase
-			.channel("custom")
-			.on(
-				"postgres_changes",
-				{
-					event: "*",
-					schema: "public",
-					table: "announcements",
-				},
-				(payload) => {
-				}
-			)
-			.subscribe();
-	}, []);
+	let hunt = null
 
 	const { data, isLoading, error } = useQuery({
 		queryKey: ["hunt"],
