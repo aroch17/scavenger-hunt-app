@@ -3,10 +3,9 @@ import {React, useState} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import FormField from '../components/FormField'
 import { useQuery } from '@tanstack/react-query'
-import { getHuntIds } from '../lib/supabase'
+import { getHuntCodes, getHuntIdFromCode } from '../lib/supabase'
 import CustomButton from '../components/CustomButton'
 import { router } from 'expo-router'
-import chooseTeam from './teams/[huntId]/choose-team'
 
 const chooseHunt = () => {
 
@@ -16,7 +15,7 @@ const chooseHunt = () => {
 		error,
 	} = useQuery({
 		queryKey: ["huntIds"],
-		queryFn: () => getHuntIds(),
+		queryFn: () => getHuntCodes(),
 	});
 
   const [isSubmitting, setSubmitting] = useState(false);
@@ -28,8 +27,10 @@ const chooseHunt = () => {
     if (form.answer === "") {
       Alert.alert("Error", "Please fill in all fields");
     }
-		else if (queryData.data.some(e => e.id === Number(form.answer))){
-      router.push(`/teams/${Number(form.answer)}/choose-team`)
+		else if (queryData.data.some(e => e.hunt_code === form.answer)){
+      const { data } = await getHuntIdFromCode(form.answer)
+      const huntId = data[0].id
+      router.push(`/teams/${Number(huntId)}/choose-team`)
 		}
     else{
       Alert.alert("Please enter a valid hunt code")
