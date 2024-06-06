@@ -28,6 +28,7 @@ const profile = () => {
 									key={item.id}
 									submission={item.submission}
 									task_id={item.task_id}
+									team_id = {item.team_id}
 									created_at={item.created_at}
 									user_id={item.user_id}
 									containerStyles="mt-7 border-2 border-white"
