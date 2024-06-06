@@ -25,7 +25,7 @@ const tasks = () => {
 					<View className="w-full px-4 my-6">
 						{hunt.tasks.length > 0 ? (
 							<FlatList
-								className="max-h-[95%]"
+								className="min-h-[80%] max-h-[95%]"
 								data={hunt.tasks}
 								renderItem={({ item }) => (
 									<Task
