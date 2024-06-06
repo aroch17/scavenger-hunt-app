@@ -47,6 +47,7 @@ export default function App() {
 					<Stack.Screen name="teams/[huntId]" options={{ headerShown: false }} />
 					<Stack.Screen name="choose-hunt" options={{ headerShown: false }} />
 					<Stack.Screen name="add-task" options={{ headerShown: false }} />
+					<Stack.Screen name="add-announcement" options={{ headerShown: false }} />
 					<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
 					<Stack.Screen name="guest/[huntId]/[teamId]" options={{ headerShown: false }} />
