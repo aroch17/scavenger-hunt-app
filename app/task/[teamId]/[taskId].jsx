@@ -1,13 +1,13 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import DisplayTask from "../../components/DisplayTask";
+import DisplayTask from "../../../components/DisplayTask";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
-import { getTask, getHuntId } from "../../lib/supabase";
+import { getTask, getHuntId } from "../../../lib/supabase";
 
 const viewTask = () => {
-	const {id: taskId} = useLocalSearchParams();
+	const {taskId: taskId, teamId: teamId} = useLocalSearchParams();
 	
 	let task = null
 	
@@ -30,7 +30,8 @@ const viewTask = () => {
 					<ScrollView contentContainerStyle={{ height: "100%" }}>
 						<View>
 							<DisplayTask
-								id = {task.id}
+								taskId = {task.id}
+								teamId = {teamId}
 								title={task.title}
 								prompt={task.prompt}
 								answer={task.answer}
