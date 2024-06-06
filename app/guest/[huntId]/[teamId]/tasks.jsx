@@ -12,7 +12,7 @@ import { useTeamContext } from "./_layout";
 const tasks = () => {
 	const [isSubmitting, setSubmitting] = useState(false);
 	const select = (task) => {
-		router.push(`/task/${task.id}`);
+		router.push(`/task/${teamId}/${task.id}`);
 	};
 
 	const { huntId, hunt, teamId, team, isLoading } = useTeamContext()
