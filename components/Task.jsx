@@ -4,8 +4,6 @@ import { icons } from "../constants";
 import { Ionicons } from '@expo/vector-icons';
 
 const Task = ({ title, taskType, handlePress, containerStyles, textStyles, isLoading }) => {
-  
-  console.log(taskType)
 
   return (
 
