@@ -9,7 +9,6 @@ export const useHuntContext = () => useContext(Context);
 
 const ChooseTeamLayout = () => {
   const { huntId } = useLocalSearchParams();
-	console.log(huntId)
 
   let hunt = null;
 
