@@ -10,7 +10,7 @@ const announcements = () => {
       {!isLoading && (
         <SafeAreaView className="bg-black h-full">
           <ScrollView contentContainerStyle={{ height: "100%" }}>
-            <Text className="text-white">Announcements</Text>
+            <Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">Announcements:</Text>
           </ScrollView>
         </SafeAreaView>
       )}

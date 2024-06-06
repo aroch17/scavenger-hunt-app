@@ -21,13 +21,14 @@ const profile = () => {
 				<View className="w-full px-4 my-6">
 					{teamSubmissions.length > 0 ? (
 						<FlatList
-							className="max-h-[95%]"
+							className="min-h-[80%] max-h-[95%]"
 							data={teamSubmissions}
 							renderItem={({ item }) => (
 								<Submission
 									key={item.id}
 									submission={item.submission}
 									task_id={item.task_id}
+									team_id = {item.team_id}
 									created_at={item.created_at}
 									user_id={item.user_id}
 									containerStyles="mt-7 border-2 border-white"
