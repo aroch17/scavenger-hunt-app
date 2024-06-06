@@ -5,6 +5,7 @@ import { Image, Text, View } from "react-native";
 import { icons } from "../../../constants";
 import { useQuery } from "@tanstack/react-query";
 import { getHunt } from "../../../lib/supabase";
+import { Ionicons } from '@expo/vector-icons';
 
 const TabIcon = ({ icon, color, name, focused }) => {
 	return (
@@ -64,12 +65,12 @@ const HuntLayout = () => {
 							options={{
 								title: "Home",
 								headerShown: false,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
+								tabBarLabel: 'Home',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Home"
-										focused={focused}
+										name={focused ? "home" : 'home-outline'}
+										size = {size}
 									/>
 								),
 							}}
@@ -80,12 +81,12 @@ const HuntLayout = () => {
 								title: "tasks",
 								headerShown: false,
 								unmountOnBlur: true,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
+								tabBarLabel: 'Tasks',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Tasks"
-										focused={focused}
+										name={focused ? "receipt" : 'receipt-outline'}
+										size = {size}
 									/>
 								),
 							}}
@@ -95,12 +96,12 @@ const HuntLayout = () => {
 							options={{
 								title: "announcements",
 								headerShown: false,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
+								tabBarLabel: 'Tasks',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Notice"
-										focused={focused}
+										name={focused ? "megaphone" : 'megaphone-outline'}
+										size = {size}
 									/>
 								),
 							}}
@@ -110,12 +111,12 @@ const HuntLayout = () => {
 							options={{
 								title: "leaderboard",
 								headerShown: false,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
+								tabBarLabel: 'Leaderboard',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Leaders"
-										focused={focused}
+										name={focused ? "trophy" : 'trophy-outline'}
+										size = {size}
 									/>
 								),
 							}}
@@ -125,12 +126,12 @@ const HuntLayout = () => {
 							options={{
 								title: "teams",
 								headerShown: false,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
+								tabBarLabel: 'Teams',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Teams"
-										focused={focused}
+										name={focused ? "people" : 'people-outline'}
+										size = {size}
 									/>
 								),
 							}}

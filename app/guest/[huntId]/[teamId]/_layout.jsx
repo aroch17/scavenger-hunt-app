@@ -6,6 +6,7 @@ import { GlobalProvider } from "../../../../context/GlobalProvider";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import { createContext, useContext } from "react";
 import { getHunt, getTeam } from "../../../../lib/supabase";
+import { Ionicons } from '@expo/vector-icons';
 
 const TabIcon = ({ icon, color, name, focused }) => {
 	return (
@@ -82,12 +83,13 @@ const GuestLayout = () => {
 								title: "Leaderboard",
 								headerShown: false,
 								unmountOnBlur: true,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
+								tabBarLabel: 'Leaderboard',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
+										name={focused ? "trophy" : "trophy-outline"}
 										color={color}
-										name="Leader"
 										focused={focused}
+										size = {size}
 									/>
 								),
 							}}
@@ -99,12 +101,12 @@ const GuestLayout = () => {
 								title: "Announcements",
 								headerShown: false,
 								unmountOnBlur: true,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.home}
+								tabBarLabel: 'Announcements',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Announce"
-										focused={focused}
+										name={focused ? "megaphone" : 'megaphone-outline'}
+										size = {size}
 									/>
 								),
 							}}
@@ -116,12 +118,12 @@ const GuestLayout = () => {
 								title: "Tasks",
 								headerShown: false,
 								unmountOnBlur: true,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.bookmark}
+								tabBarLabel: 'Tasks',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Tasks"
-										focused={focused}
+										name={focused ? "receipt" : 'receipt-outline'}
+										size = {size}
 									/>
 								),
 							}}
@@ -133,12 +135,12 @@ const GuestLayout = () => {
 								title: "Submissions",
 								headerShown: false,
 								unmountOnBlur: true,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.plus}
+								tabBarLabel: 'Submissions',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Submissions"
-										focused={focused}
+										name={focused ? "checkmark-done" : 'checkmark-done-outline'}
+										size = {size}
 									/>
 								),
 							}}
@@ -150,12 +152,12 @@ const GuestLayout = () => {
 								title: "Profile",
 								headerShown: false,
 								unmountOnBlur: true,
-								tabBarIcon: ({ color, focused }) => (
-									<TabIcon
-										icon={icons.profile}
+								tabBarLabel: 'Profile',
+								tabBarIcon: ({ color, focused, size }) => (
+									<Ionicons
 										color={color}
-										name="Profile"
-										focused={focused}
+										name={focused ? "person" : "person-outline"}
+										size = {size}
 									/>
 								),
 							}}

@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
 import DropdownInput from '../../../../components/DropdownInput';
+import { Ionicons } from '@expo/vector-icons';
 
 const profile = () => {
   return (
@@ -15,6 +16,7 @@ const profile = () => {
 				title="Choose Option"
 				>
 				</DropdownInput>
+
 			</View>
 		</SafeAreaView>
   )

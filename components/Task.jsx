@@ -1,9 +1,14 @@
 import { TouchableOpacity, Text, Image, View } from 'react-native'
 import React from 'react'
 import { icons } from "../constants";
+import { Ionicons } from '@expo/vector-icons';
 
 const Task = ({ title, taskType, handlePress, containerStyles, textStyles, isLoading }) => {
+  
+  console.log(taskType)
+
   return (
+
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.7}
@@ -13,11 +18,11 @@ const Task = ({ title, taskType, handlePress, containerStyles, textStyles, isLoa
 
       {taskType === "Text" && (
         <View className="absolute mx-4">
-            <Image
-              source={icons.bookmark}
-              className="w-6 h-6"
-              resizeMode="contain"
-            />
+          <Ionicons
+            name="text" 
+            size={20} 
+            color="gray"
+          />
         </View>
       )}
 

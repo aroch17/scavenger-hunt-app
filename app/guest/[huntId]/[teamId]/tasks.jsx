@@ -17,6 +17,8 @@ const tasks = () => {
 
 	const { huntId, hunt, teamId, team, isLoading } = useTeamContext()
 
+	console.log(hunt.tasks)
+
 
 	return (
 		<>
