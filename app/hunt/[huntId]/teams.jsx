@@ -13,7 +13,10 @@ const HuntTeams = () => {
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
 					<View className="bg-black items-center">
-						<Text className="text-white font-pbold text-2xl mt-20">
+					<Text className="text-white font-pbold text-2xl mt-20">
+							Hunt Code: {hunt.hunt_code}
+						</Text>
+						<Text className="text-white font-pbold text-2xl mt-5">
 							{hunt.name}
 						</Text>
 						<Text className="mt-5 font-bold text-white text-xl">Teams: </Text>
