@@ -4,7 +4,7 @@ import { Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 import { icons } from "../../../constants";
 import { useQuery } from "@tanstack/react-query";
-import { getHunt } from "../../../lib/supabase";
+import { getHunt, supabase } from "../../../lib/supabase";
 import { Ionicons } from '@expo/vector-icons';
 
 const TabIcon = ({ icon, color, name, focused }) => {
