@@ -24,6 +24,7 @@ const Host = () => {
 		prompt: "",
 		answer: "",
 		taskType: "",
+		points: ""
 	});
 
 	return (
@@ -48,6 +49,10 @@ const Host = () => {
 					title="Type"
 					handleChangeText={(e) => setForm({ ...form, taskType: e })}
 				/>
+				<FormField
+					title="Points"
+					handleChangeText={(e) => setForm({ ...form, points: e })}
+				/>
 				<CustomButton
 					title="Add"
 					containerStyles="mt-7 border-2 border-white w-full"
@@ -57,6 +62,7 @@ const Host = () => {
 							prompt: form.prompt,
 							answer: form.answer,
 							task_type: form.taskType,
+							points: Number(form.points),
 							hunt_id: huntId,
 						});
 						{
