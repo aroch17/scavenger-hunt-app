@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 const TaskLayout = () => {
 	return (
 		<Stack>
-			<Stack.Screen name="[id]" options={{headerShown: false}}/>
+			<Stack.Screen name="[taskId]" options={{headerShown: false}}/>
 		</Stack>
 	);
 };
