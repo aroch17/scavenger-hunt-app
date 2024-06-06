@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { addHunt } from "../lib/supabase";
 import { router } from "expo-router";
 import { useGlobalContext } from "../context/GlobalProvider";
+import { generateUniqueID } from "../lib/uniqueId";
 
 const HuntBuilder = () => {
   const mutation = useMutation({
@@ -48,7 +49,8 @@ const HuntBuilder = () => {
             mutation.mutate({
 							name: form.name,
               description: form.description,
-              creator_id: user.id
+              creator_id: user.id,
+              hunt_code: generateUniqueID()
 						});
           }}
         />

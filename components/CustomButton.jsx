@@ -13,6 +13,7 @@ const CustomButton = ({title, handlePress, containerStyles, textStyles, isLoadin
         {title}
         </Text>
     </TouchableOpacity>
+
   )
 }
 

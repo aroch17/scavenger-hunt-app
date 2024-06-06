@@ -1,6 +1,7 @@
 import { Redirect, Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 import { icons } from "../../constants";
+import { Ionicons } from '@expo/vector-icons';
 
 const TabIcon = ({ icon, color, name, focused }) => {
 	return (
@@ -42,12 +43,12 @@ const HostLayout = () => {
 					title: "hunts",
 					headerShown: false,
 					unmountOnBlur: true,
-					tabBarIcon: ({ color, focused }) => (
-						<TabIcon
-							icon={icons.home}
+					tabBarLabel: 'Home',
+					tabBarIcon: ({ color, focused, size }) => (
+						<Ionicons
 							color={color}
-							name="Home"
-							focused={focused}
+							name={focused ? "home" : 'home-outline'}
+							size = {size}
 						/>
 					),
 				}}
@@ -57,12 +58,12 @@ const HostLayout = () => {
 				options={{
 					title: "Profile",
 					headerShown: false,
-					tabBarIcon: ({ color, focused }) => (
-						<TabIcon
-							icon={icons.home}
-							color={color}
-							name="Profile"
-							focused={focused}
+					tabBarLabel: 'Profile',
+					tabBarIcon: ({ color, focused, size }) => (
+						<Ionicons
+								color={color}
+								name={focused ? "person" : 'person-outline'}
+								size = {size}
 						/>
 					),
 				}}

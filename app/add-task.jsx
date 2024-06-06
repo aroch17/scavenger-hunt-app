@@ -30,7 +30,7 @@ const Host = () => {
 		<SafeAreaView className="bg-black h-full">
 			<View className="bg-black h-full items-center">
 				<Text className="text-white font-pbold text-2xl mt-20">
-					Add Question
+					Add Task
 				</Text>
 				<FormField
 					title="Title"

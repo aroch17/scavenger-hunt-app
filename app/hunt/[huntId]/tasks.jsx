@@ -28,6 +28,7 @@ const HuntTasks = () => {
 										key={item.id}
 										title={item.title}
 										containerStyles="mt-7 border-2 border-white"
+										taskType = {item.task_type}
 									/>
 								)}
 							/>

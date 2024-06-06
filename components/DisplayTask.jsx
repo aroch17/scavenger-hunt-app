@@ -7,11 +7,19 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useMutation } from "@tanstack/react-query";
 import { addSubmission } from "../lib/supabase";
 
-const DisplayTask = ({ id, title, prompt, answer, taskType, otherStyles, textStyles, value, placeholder, handleChangeText}) => {
+const DisplayTask = ({ taskId, teamId, title, prompt, answer, taskType, huntId, otherStyles, textStyles, value, placeholder, handleChangeText}) => {
 
   const [isSubmitting, setSubmitting] = useState(false);
 	const [form, setForm] = useState({
 		answer: '',
+	});
+
+  const mutation = useMutation({
+		mutationFn: addSubmission,
+		onSuccess: () => {
+			// Invalidate and refetch
+			queryClient.invalidateQueries({ queryKey: ["submissions"] });
+		},
 	});
 
 	const submit = async () => {
@@ -21,24 +29,17 @@ const DisplayTask = ({ id, title, prompt, answer, taskType, otherStyles, textSty
 		else if (form.answer === answer){
 			Alert.alert("Answer was correct: " + form.answer)
       mutation.mutate({
-        user_id: "0f52bbf5-175c-404b-9089-c3f54c981a3f",
         submission: form.answer,
-        task_id: id
+        task_id: taskId,
+        team_id: teamId,
+        hunt_id: huntId
       });
 
 		}
     else{
-      Alert.alert("Incorrect")
+      Alert.alert("Incorrec t")
     }
   }
-
-  const mutation = useMutation({
-		mutationFn: addSubmission,
-		onSuccess: () => {
-			// Invalidate and refetch
-			queryClient.invalidateQueries({ queryKey: ["submissions"] });
-		},
-	});
 
   return (
     <View className="w-full justify-center min-h-[85vh] px-4 my-6">
