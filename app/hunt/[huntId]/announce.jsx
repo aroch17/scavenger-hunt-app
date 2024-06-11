@@ -3,14 +3,13 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import CustomButton from "../../../components/CustomButton";
-import { supabase } from "../../../lib/supabase";
+import { getAnnouncements, supabase } from "../../../lib/supabase";
 import { useHuntContext } from "./_layout";
 import Announcement from "../../../components/Announcement";
 
 const HuntAnnouncements = () => {
 	const { huntId, hunt, isLoading } = useHuntContext();
 	const [announcements, setAnnouncements] = useState(hunt.announcements)
-	console.log(announcements)
 
 	useEffect(() => {
 		const channel = supabase
@@ -22,12 +21,10 @@ const HuntAnnouncements = () => {
 					schema: "public",
 					table: "announcements",
 				},
-				(payload) => {
-					const { new:newAnnouncement} = payload
-					if (!isLoading) {
-						console.log("updating")
-						setAnnouncements([...announcements, newAnnouncement])
-					}
+				async (payload) => {
+					const data = await getAnnouncements(huntId)
+					setAnnouncements(data.data)
+					hunt.announcements = data.data
 				}
 			)
 			.subscribe();

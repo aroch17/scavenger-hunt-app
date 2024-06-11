@@ -1,14 +1,35 @@
 import { View, Text, FlatList } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, router } from "expo-router";
 import Task from "../../../components/Task";
 import CustomButton from "../../../components/CustomButton";
 import { useHuntContext } from "./_layout";
+import { getTasks, supabase } from "../../../lib/supabase";
 
 
 const HuntTasks = () => {
   const { huntId, hunt, isLoading } = useHuntContext()
+	const [tasks, setTasks] = useState(hunt.tasks)
+
+	useEffect(() => {
+		const channel = supabase
+			.channel("custom")
+			.on(
+				"postgres_changes",
+				{
+					event: "*",
+					schema: "public",
+					table: "tasks",
+				},
+				async (payload) => {
+					const data = await getTasks(huntId)
+					setTasks(data.data)
+					hunt.tasks = data.data
+				}
+			)
+			.subscribe();
+	}, []);
 
   return (
     <>
@@ -19,10 +40,10 @@ const HuntTasks = () => {
 							{hunt.name}
 						</Text>
 						<Text className="mt-5 font-bold text-white text-xl">Tasks: </Text>
-						{hunt.tasks.length > 0 ? (
+						{tasks.length > 0 ? (
 							<FlatList
 								className="max-h-[60%]"
-								data={hunt.tasks}
+								data={tasks}
 								renderItem={({ item }) => (
 									<Task
 										key={item.id}
