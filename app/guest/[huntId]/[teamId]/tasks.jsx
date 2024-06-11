@@ -29,6 +29,7 @@ const tasks = () => {
 				async (payload) => {
 					const data = await getTasks(huntId)
 					setTasks(data.data)
+					hunt.tasks = data.data
 				}
 			)
 			.subscribe();
