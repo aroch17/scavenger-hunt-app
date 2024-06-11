@@ -60,7 +60,7 @@ const Host = () => {
 							hunt_id: huntId,
 						});
 						{
-							!mutation.isPending && router.replace(`/hunt/${huntId}`)
+							!mutation.isPending && router.replace(`/hunt/${huntId}/tasks`)
 						}
 					}}
 				/>
