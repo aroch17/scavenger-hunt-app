@@ -6,6 +6,7 @@ const GlobalContext = createContext();
 
 export const useGlobalContext = () => useContext(GlobalContext)
 
+// TODO: Add a way to store whether user has joined a hunt
 export const GlobalProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
