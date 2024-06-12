@@ -1,11 +1,32 @@
 import { View, Text, FlatList } from "react-native";
-import { React } from "react";
+import { React, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Submission from "../../../components/Submission";
 import { useHuntContext } from "./_layout";
+import { getSubmissions, supabase } from "../../../lib/supabase";
 
 const HuntHome = () => {
-	const { hunt, isLoading } = useHuntContext()
+	const { huntId, hunt, isLoading } = useHuntContext()
+	const [submissions, setSubmissions] = useState(hunt.submissions)
+
+	useEffect(() => {
+		const channel = supabase
+			.channel("host-submissions")
+			.on(
+				"postgres_changes",
+				{
+					event: "*",
+					schema: "public",
+					table: "submissions",
+				},
+				async (payload) => {
+					const data = await getSubmissions(huntId);
+					setSubmissions(data.data);
+					hunt.submissions = data.data
+				}
+			)
+			.subscribe();
+	}, []);
 
   return (
 		<>
@@ -15,10 +36,10 @@ const HuntHome = () => {
 						Hunt submissions:
 					</Text>
 					<View className="w-full px-4 my-6">
-						{hunt.submissions.length > 0 ? (
+						{submissions.length > 0 ? (
 							<FlatList
 								className="min-h-[80%] max-h-[95%]"
-								data={hunt.submissions}
+								data={submissions}
 								renderItem={({ item }) => (
 									<Submission
 										key={item.id}

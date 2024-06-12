@@ -14,7 +14,7 @@ const HuntTasks = () => {
 
 	useEffect(() => {
 		const channel = supabase
-			.channel("custom")
+			.channel("host-tasks")
 			.on(
 				"postgres_changes",
 				{

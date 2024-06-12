@@ -10,7 +10,7 @@ const announcements = () => {
 
 	useEffect(() => {
 		const channel = supabase
-			.channel("custom")
+			.channel("guest-announcements")
 			.on(
 				"postgres_changes",
 				{
