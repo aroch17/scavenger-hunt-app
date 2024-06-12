@@ -11,7 +11,7 @@ const HuntHome = () => {
 
 	useEffect(() => {
 		const channel = supabase
-			.channel("custom")
+			.channel("host-submissions")
 			.on(
 				"postgres_changes",
 				{

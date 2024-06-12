@@ -18,7 +18,7 @@ const tasks = () => {
 
 	useEffect(() => {
 		const channel = supabase
-			.channel("custom")
+			.channel("guest-tasks")
 			.on(
 				"postgres_changes",
 				{

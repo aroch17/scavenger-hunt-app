@@ -13,7 +13,7 @@ const HuntAnnouncements = () => {
 
 	useEffect(() => {
 		const channel = supabase
-			.channel("custom")
+			.channel("host-announcements")
 			.on(
 				"postgres_changes",
 				{
