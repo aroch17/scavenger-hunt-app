@@ -12,7 +12,7 @@ const viewTask = () => {
 	let task = null
 	
 	// should consider implementing a cache for this
-	const { data:taskData, isLoading:taskIsLoading, taskError } = useQuery({
+	const { data:taskData, isLoading:taskIsLoading, error:taskError } = useQuery({
 		queryKey: ["task"],
 		queryFn: () => getTask(taskId)
 	});
@@ -27,7 +27,7 @@ const viewTask = () => {
 		<>
 			{!taskIsLoading && (
 				<SafeAreaView className="bg-black h-full">
-					<ScrollView contentContainerStyle={{ height: "100%" }}>
+					<ScrollView>
 						<View>
 							<DisplayTask
 								taskId = {task.id}
