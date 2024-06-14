@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image, ScrollView } from "react-native";
 import { React, useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Submission from "../../../../components/Submission";
@@ -6,8 +6,9 @@ import { useTeamContext } from "./_layout";
 import { getSubmissions, supabase } from "../../../../lib/supabase";
 
 const submissions = () => {
-	const { huntId, hunt, isLoading } = useTeamContext()
-	const [submissions, setSubmissions] = useState(hunt.submissions)
+	const { huntId, hunt, isLoading, CDNUrl, imgObjects, teamId } =
+		useTeamContext();
+	const [submissions, setSubmissions] = useState(hunt.submissions);
 
 	useEffect(() => {
 		const channel = supabase
@@ -22,21 +23,20 @@ const submissions = () => {
 				async (payload) => {
 					const data = await getSubmissions(huntId);
 					setSubmissions(data.data);
-					hunt.submissions = data.data
+					hunt.submissions = data.data;
 				}
 			)
 			.subscribe();
 	}, []);
-
 	return (
 		<>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
-						<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">
-							Hunt submissions
-						</Text>
-						<View className="w-full px-4 my-6">
-							{submissions.length > 0 ? (
+					<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">
+						Hunt submissions
+					</Text>
+					<ScrollView className="w-full px-4 my-6">
+						{/* {submissions.length > 0 ? (
 								<FlatList
 									className="min-h-[80%] max-h-[95%]"
 									data={submissions}
@@ -56,8 +56,21 @@ const submissions = () => {
 								<Text className="text-white font-pregular text-xl">
 									No submissions to display.
 								</Text>
-							)}
-						</View>
+							)} */}
+						{imgObjects.map((imgObject) => (
+							<Image
+								key={imgObject.id}
+								style={{
+									width: 300,
+									height: 300,
+									resizeMode: "contain",
+								}}
+								source={{
+									uri: `${CDNUrl}/${huntId}/${imgObject.team_id}/${imgObject.uuid}`,
+								}}
+							/>
+						))}
+					</ScrollView>
 				</SafeAreaView>
 			)}
 		</>
