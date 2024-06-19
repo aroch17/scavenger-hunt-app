@@ -1,9 +1,5 @@
-import { Redirect, Tabs, useLocalSearchParams } from "expo-router";
-import { Image, Text, View } from "react-native";
-import { icons } from "../../../../constants";
-import { SplashScreen, Stack } from "expo-router";
-import { GlobalProvider } from "../../../../context/GlobalProvider";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { Tabs, useLocalSearchParams } from "expo-router";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { createContext, useContext } from "react";
 import { getHunt, getHuntPhotoPaths, getTeam } from "../../../../lib/supabase";
 import { Ionicons } from '@expo/vector-icons';
@@ -18,7 +14,7 @@ const GuestLayout = () => {
 	const { huntId, teamId } = useLocalSearchParams();
 
 	let hunt = null;
-	const { data:huntData, isLoading: huntIsLoading, huntError } = useQuery({
+	const { data:huntData, isLoading: huntIsLoading, error:huntError } = useQuery({
 		queryKey: ["hunt"],
 		queryFn: () => getHunt(huntId),
 	});
@@ -28,7 +24,7 @@ const GuestLayout = () => {
 	}
 
 	let team = null;
-	const { data:teamData, isLoading: teamIsLoading, teamError } = useQuery({
+	const { data:teamData, isLoading: teamIsLoading, error:teamError } = useQuery({
 		queryKey: ["team"],
 		queryFn: () => getTeam(teamId),
 	});
@@ -44,10 +40,10 @@ const GuestLayout = () => {
 	});
 
 	if (!imgIsLoading) {
-		imgObjects = data.data
+		imgObjects = data
 	}
 
-	const isLoading = huntIsLoading || teamIsLoading;
+	const isLoading = huntIsLoading || teamIsLoading || imgIsLoading;
 
 	return (
 		<>

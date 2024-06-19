@@ -2,12 +2,12 @@ import { Text, FlatList, Image } from "react-native";
 import { React, useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTeamContext } from "./_layout";
-import { getSubmissions, supabase } from "../../../../lib/supabase";
+import { getHuntPhotoPaths, supabase } from "../../../../lib/supabase";
 
 const submissions = () => {
 	const { huntId, hunt, isLoading, CDNUrl, imgObjects, teamId } =
 		useTeamContext();
-	const [submissions, setSubmissions] = useState(hunt.submissions);
+	const [submissions, setSubmissions] = useState(imgObjects.data);
 
 	useEffect(() => {
 		const channel = supabase
@@ -17,16 +17,18 @@ const submissions = () => {
 				{
 					event: "*",
 					schema: "public",
-					table: "submissions",
+					table: "photopaths",
 				},
 				async (payload) => {
-					const data = await getSubmissions(huntId);
+					const data = await getHuntPhotoPaths(huntId);
+					console.log(data.data)
 					setSubmissions(data.data);
-					hunt.submissions = data.data;
+					imgObjects.data = data.data
 				}
 			)
 			.subscribe();
 	}, []);
+
 	return (
 		<>
 			{!isLoading && (
