@@ -1,44 +1,20 @@
-import { Redirect, Tabs, useLocalSearchParams } from "expo-router";
-import { Image, Text, View } from "react-native";
-import { icons } from "../../../../constants";
-import { SplashScreen, Stack } from "expo-router";
-import { GlobalProvider } from "../../../../context/GlobalProvider";
-import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import { Tabs, useLocalSearchParams } from "expo-router";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { createContext, useContext } from "react";
-import { getHunt, getTeam } from "../../../../lib/supabase";
+import { getHunt, getHuntPhotoPaths, getTeam } from "../../../../lib/supabase";
 import { Ionicons } from '@expo/vector-icons';
 
-const TabIcon = ({ icon, color, name, focused }) => {
-	return (
-		<View className="flex items-center justify-center gap-2">
-			<Image
-				source={icon}
-				resizeMode="contain"
-				tintColor={color}
-				className="w-6 h-6"
-			/>
-			<Text
-				className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
-				style={{ color: color }}
-			>
-				{name}
-			</Text>
-		</View>
-	);
-};
+const CDNUrl = "https://psdsdmptskceretwhxxt.supabase.co/storage/v1/object/public/submissions"
 
 const queryClient = new QueryClient();
-
 const Context = createContext();
 export const useTeamContext = () => useContext(Context);
 
 const GuestLayout = () => {
-
 	const { huntId, teamId } = useLocalSearchParams();
 
 	let hunt = null;
-
-	const { data:huntData, isLoading: huntIsLoading, huntError } = useQuery({
+	const { data:huntData, isLoading: huntIsLoading, error:huntError } = useQuery({
 		queryKey: ["hunt"],
 		queryFn: () => getHunt(huntId),
 	});
@@ -48,8 +24,7 @@ const GuestLayout = () => {
 	}
 
 	let team = null;
-
-	const { data:teamData, isLoading: teamIsLoading, teamError } = useQuery({
+	const { data:teamData, isLoading: teamIsLoading, error:teamError } = useQuery({
 		queryKey: ["team"],
 		queryFn: () => getTeam(teamId),
 	});
@@ -57,13 +32,23 @@ const GuestLayout = () => {
 	if (!teamIsLoading) {
 		team = teamData.data[0];
 	}
-	
-	const isLoading = huntIsLoading || teamIsLoading;
+
+	let imgObjects = null
+	const { data, isLoading: imgIsLoading, error } = useQuery({
+		queryKey: ["imgs"],
+		queryFn: () => getHuntPhotoPaths(huntId),
+	});
+
+	if (!imgIsLoading) {
+		imgObjects = data
+	}
+
+	const isLoading = huntIsLoading || teamIsLoading || imgIsLoading;
 
 	return (
 		<>
 		{!isLoading && (
-				<Context.Provider value={{ huntId, hunt, teamId, team, isLoading }}>
+				<Context.Provider value={{ huntId, hunt, teamId, team, isLoading, CDNUrl, imgObjects }}>
 					<Tabs
 						screenOptions={{
 							tabBarActiveTintColor: "#FFA001",
@@ -166,8 +151,6 @@ const GuestLayout = () => {
 			</Context.Provider>
 			)}
 		</>
-
-		
 	);
 };
 
