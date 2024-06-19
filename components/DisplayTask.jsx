@@ -62,9 +62,6 @@ const DisplayTask = ({ taskId, teamId, title, prompt, answer, taskType, task_poi
     }
   }
 
-  console.log(teamId)
-  console.log(typeof teamId)
-
   return (
     <View className="w-full justify-center min-h-[85vh] px-4 my-6">
       <Text className={textStyles}>{title}</Text>
