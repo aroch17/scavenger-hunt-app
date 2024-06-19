@@ -21,7 +21,6 @@ const submissions = () => {
 				},
 				async (payload) => {
 					const data = await getHuntPhotoPaths(huntId);
-					console.log(data.data)
 					setSubmissions(data.data);
 					imgObjects.data = data.data
 				}
