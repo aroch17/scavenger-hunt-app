@@ -35,6 +35,7 @@ const viewTask = () => {
 								title={task.title}
 								prompt={task.prompt}
 								answer={task.answer}
+								task_points={task.points}
 								huntId = {huntId}
 								otherStyles="mt-7"
 								textStyles="text-base text-white font-pmedium"
