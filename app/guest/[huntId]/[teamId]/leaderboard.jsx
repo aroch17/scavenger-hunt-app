@@ -62,7 +62,7 @@ const Guest = () => {
 								/>
 							) : (
 								<Text className="text-white font-pregular text-xl">
-									No submissions to display.
+									No teams to display - error.
 								</Text>
 							)}
 						</View>
