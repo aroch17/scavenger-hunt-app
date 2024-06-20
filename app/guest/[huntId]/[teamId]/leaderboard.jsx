@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Alert } from 'react-native'
+import { View, Text, ScrollView, Alert, FlatList } from 'react-native'
 import {React, useState} from 'react'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTeamContext } from './_layout';
@@ -7,12 +7,13 @@ import Team from '../../../../components/Team';
 const Guest = () => {
 	const { huntId, hunt, teamId, team, isLoading } = useTeamContext()
 
+	console.log(hunt.teams)
+
   return (
 
 		<>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
-					<ScrollView contentContainerStyle={{ height: "100%" }}>
 						<View className="bg-black items-center">
 							<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">{team.name}</Text>
 							<Text className="mt-10 font-bold text-white text-3xl">Leaderboard</Text>
@@ -41,8 +42,21 @@ const Guest = () => {
               textStyles="text-amber-600"
 						/>
 					</View>
-
-					</ScrollView>
+					<View className="w-full px-4 my-6">
+							{hunt.teams.length > 0 ? (
+								<FlatList
+									className="min-h-[80%] max-h-[95%]"
+									data={hunt.teams}
+									renderItem={({ item }) => (
+										<Text className="text-white">{item.id}</Text>
+									)}
+								/>
+							) : (
+								<Text className="text-white font-pregular text-xl">
+									No submissions to display.
+								</Text>
+							)}
+						</View>
 				</SafeAreaView>
 			)}
 				
