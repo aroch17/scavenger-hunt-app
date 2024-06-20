@@ -14,10 +14,9 @@ const Guest = () => {
 		<>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
-						<View className="bg-black items-center">
 							<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">{team.name}</Text>
-							<Text className="mt-10 font-bold text-white text-3xl">Leaderboard</Text>
-						<Team
+							<Text className="mt-10 font-bold text-white text-3xl text-center">Leaderboard</Text>
+						{/* <Team
 							key="1"
               position="1"
 							title="Team 1"
@@ -40,15 +39,25 @@ const Guest = () => {
               points="25"
 							containerStyles="mt-7 border-2 border-white rounded-xl"
               textStyles="text-amber-600"
-						/>
-					</View>
+						/> */}
 					<View className="w-full px-4 my-6">
 							{hunt.teams.length > 0 ? (
 								<FlatList
 									className="min-h-[80%] max-h-[95%]"
 									data={hunt.teams}
-									renderItem={({ item }) => (
-										<Text className="text-white">{item.id}</Text>
+									keyExtractor={(item, index) => index.toString()}
+									renderItem={({ item, index }) => (
+										<View>
+											<Team
+											key={index}
+              				position={index + 1}
+											title={item.name}
+              				points={item.score}
+											containerStyles="mt-7 border-2 border-white rounded-xl"
+              				textStyles="text-amber-600"
+											/>
+										</View>
+										
 									)}
 								/>
 							) : (
