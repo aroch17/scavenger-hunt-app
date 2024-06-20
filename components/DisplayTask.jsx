@@ -12,6 +12,7 @@ const DisplayTask = ({
 	title,
 	prompt,
 	answer,
+  task_points,
 	taskType,
 	huntId,
 	otherStyles,
