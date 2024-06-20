@@ -10,6 +10,7 @@ const Task = ({
 	textStyles,
 	isLoading,
 }) => {
+
 	return (
 		<TouchableOpacity
 			onPress={handlePress}
