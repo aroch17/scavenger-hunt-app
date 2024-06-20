@@ -1,13 +1,36 @@
 import { View, Text, FlatList } from "react-native";
-import React from "react";
+import { React, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Team from "../../../components/Team";
 import { useHuntContext } from "./_layout";
+import { getTeams, supabase } from "../../../lib/supabase";
 
 const HuntLeaderboard = () => {
 	const { hunt, isLoading } = useHuntContext();
 
-	const sortedTeams = hunt.teams.slice().sort((a, b) => b.score - a.score);
+	const [teams, setTeams] = useState(hunt.teams);
+
+	let sortedTeams = hunt.teams.slice().sort((a, b) => b.score - a.score);
+
+	useEffect(() => {
+		const channel = supabase
+			.channel("host-leaderboard")
+			.on(
+				"postgres_changes",
+				{
+					event: "*",
+					schema: "public",
+					table: "teams",
+				},
+				async (payload) => {
+					const data = await getTeams(hunt.id);
+					setTeams(data.data);
+					hunt.teams = data.data
+					sortedTeams = hunt.teams.slice().sort((a, b) => b.score - a.score);
+				}
+			)
+			.subscribe();
+	}, []);
 
 	return (
 		<>
