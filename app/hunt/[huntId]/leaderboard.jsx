@@ -7,7 +7,7 @@ import { useHuntContext } from "./_layout";
 const HuntLeaderboard = () => {
 	const { hunt, isLoading } = useHuntContext();
 
-	console.log(hunt.teams)
+	const sortedTeams = hunt.teams.slice().sort((a, b) => b.score - a.score);
 
 	return (
 		<>
@@ -17,10 +17,10 @@ const HuntLeaderboard = () => {
 							Leaderboard
 						</Text>
 						<View className="w-full px-4 my-6">
-							{hunt.teams.length > 0 ? (
+							{sortedTeams.length > 0 ? (
 								<FlatList
 									className="min-h-[80%] max-h-[95%]"
-									data={hunt.teams}
+									data={sortedTeams}
 									keyExtractor={(item, index) => index.toString()}
 									renderItem={({ item, index }) => (
 										<View>
