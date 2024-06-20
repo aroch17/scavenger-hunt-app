@@ -26,6 +26,7 @@ const addATeam = () => {
 
   const [form, setForm] = useState({
 		teamName: "",
+		password: ""
 	});
 
   return (
@@ -38,14 +39,19 @@ const addATeam = () => {
 					title="Team Name:"
 					handleChangeText={(e) => setForm({ ...form, teamName: e })}
 				/>
+				<FormField
+					title="Password:"
+					isPasswordField={true}
+					handleChangeText={(e) => setForm({ ...form, password: e })}
+				/>
 				<CustomButton
 					title="Add"
 					containerStyles="mt-7 border-2 border-white w-full"
 					handlePress={() => {
-						console.log("Button pressed, starting mutation...");
 						mutation.mutate({
 							name: form.teamName,
 							hunt_id: huntId,
+							password: form.password
 						});
 					}}
 				/>
