@@ -7,32 +7,29 @@ import CustomButton from "../../../components/CustomButton";
 import { useHuntContext } from "./_layout";
 import { getTasks, supabase } from "../../../lib/supabase";
 
-
 const HuntTasks = () => {
-  const { huntId, hunt, isLoading } = useHuntContext()
-	const [tasks, setTasks] = useState(hunt.tasks)
+	const { huntId, hunt, isLoading } = useHuntContext();
+	const [tasks, setTasks] = useState(hunt.tasks);
 
-	useEffect(() => {
-		const channel = supabase
-			.channel("host-tasks")
-			.on(
-				"postgres_changes",
-				{
-					event: "*",
-					schema: "public",
-					table: "tasks",
-				},
-				async (payload) => {
-					const data = await getTasks(huntId)
-					setTasks(data.data)
-					hunt.tasks = data.data
-				}
-			)
-			.subscribe();
-	}, []);
+	const channel = supabase
+		.channel("host-tasks")
+		.on(
+			"postgres_changes",
+			{
+				event: "*",
+				schema: "public",
+				table: "tasks",
+			},
+			async (payload) => {
+				const data = await getTasks(huntId);
+				setTasks(data.data);
+				hunt.tasks = data.data;
+			}
+		)
+		.subscribe();
 
-  return (
-    <>
+	return (
+		<>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
 					<View className="bg-black items-center">
@@ -49,7 +46,7 @@ const HuntTasks = () => {
 										key={item.id}
 										title={item.title}
 										containerStyles="mt-7 border-2 border-white"
-										taskType = {item.task_type}
+										taskType={item.task_type}
 									/>
 								)}
 							/>
@@ -63,14 +60,17 @@ const HuntTasks = () => {
 							containerStyles="mt-7 bg-white w-full"
 							textStyles="text-black"
 							handlePress={() => {
-								router.replace({pathname:"/add-task", params:{huntId: huntId}});
+								router.replace({
+									pathname: "/add-task",
+									params: { huntId: huntId },
+								});
 							}}
 						/>
 					</View>
 				</SafeAreaView>
 			)}
 		</>
-  )
-}
+	);
+};
 
-export default HuntTasks
+export default HuntTasks;

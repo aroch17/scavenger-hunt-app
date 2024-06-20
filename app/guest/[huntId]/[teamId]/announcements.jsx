@@ -8,24 +8,22 @@ const announcements = () => {
 	const { huntId, hunt, teamId, team, isLoading } = useTeamContext();
 	const [announcements, setAnnouncements] = useState(hunt.announcements);
 
-	useEffect(() => {
-		const channel = supabase
-			.channel("guest-announcements")
-			.on(
-				"postgres_changes",
-				{
-					event: "*",
-					schema: "public",
-					table: "announcements",
-				},
-				async (payload) => {
-					const data = await getAnnouncements(huntId);
-					setAnnouncements(data.data);
-					hunt.announcements = data.data
-				}
-			)
-			.subscribe();
-	}, []);
+	const channel = supabase
+		.channel("guest-announcements")
+		.on(
+			"postgres_changes",
+			{
+				event: "*",
+				schema: "public",
+				table: "announcements",
+			},
+			async (payload) => {
+				const data = await getAnnouncements(huntId);
+				setAnnouncements(data.data);
+				hunt.announcements = data.data;
+			}
+		)
+		.subscribe();
 
 	return (
 		<>

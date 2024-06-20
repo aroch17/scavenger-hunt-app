@@ -9,27 +9,25 @@ import Announcement from "../../../components/Announcement";
 
 const HuntAnnouncements = () => {
 	const { huntId, hunt, isLoading } = useHuntContext();
-	const [announcements, setAnnouncements] = useState(hunt.announcements)
+	const [announcements, setAnnouncements] = useState(hunt.announcements);
 
-	useEffect(() => {
-		const channel = supabase
-			.channel("host-announcements")
-			.on(
-				"postgres_changes",
-				{
-					event: "*",
-					schema: "public",
-					table: "announcements",
-				},
-				async (payload) => {
-					const data = await getAnnouncements(huntId)
-					setAnnouncements(data.data)
-					hunt.announcements = data.data
-				}
-			)
-			.subscribe();
-	}, []);
-	
+	const channel = supabase
+		.channel("host-announcements")
+		.on(
+			"postgres_changes",
+			{
+				event: "*",
+				schema: "public",
+				table: "announcements",
+			},
+			async (payload) => {
+				const data = await getAnnouncements(huntId);
+				setAnnouncements(data.data);
+				hunt.announcements = data.data;
+			}
+		)
+		.subscribe();
+
 	return (
 		<>
 			{!isLoading && (

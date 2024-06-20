@@ -7,26 +7,24 @@ import { getTeamSubmissions, supabase } from "../../../../lib/supabase";
 
 const profile = () => {
 	const { huntId, teamId, team, isLoading } = useTeamContext();
-	const [teamSubmissions, setTeamSubmissions] = useState(team.submissions)
+	const [teamSubmissions, setTeamSubmissions] = useState(team.submissions);
 
-	useEffect(() => {
-		const channel = supabase
-			.channel("guest-team-submissions")
-			.on(
-				"postgres_changes",
-				{
-					event: "*",
-					schema: "public",
-					table: "submissions",
-				},
-				async (payload) => {
-					const data = await getTeamSubmissions(huntId, teamId);
-					setTeamSubmissions(data.data);
-					team.submissions = data.data;
-				}
-			)
-			.subscribe();
-	}, []);
+	const channel = supabase
+		.channel("guest-team-submissions")
+		.on(
+			"postgres_changes",
+			{
+				event: "*",
+				schema: "public",
+				table: "submissions",
+			},
+			async (payload) => {
+				const data = await getTeamSubmissions(huntId, teamId);
+				setTeamSubmissions(data.data);
+				team.submissions = data.data;
+			}
+		)
+		.subscribe();
 
 	return (
 		<>

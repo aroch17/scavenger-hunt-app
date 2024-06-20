@@ -6,29 +6,27 @@ import { useHuntContext } from "./_layout";
 import { getSubmissions, supabase } from "../../../lib/supabase";
 
 const HuntHome = () => {
-	const { huntId, hunt, isLoading } = useHuntContext()
-	const [submissions, setSubmissions] = useState(hunt.submissions)
+	const { huntId, hunt, isLoading } = useHuntContext();
+	const [submissions, setSubmissions] = useState(hunt.submissions);
 
-	useEffect(() => {
-		const channel = supabase
-			.channel("host-submissions")
-			.on(
-				"postgres_changes",
-				{
-					event: "*",
-					schema: "public",
-					table: "submissions",
-				},
-				async (payload) => {
-					const data = await getSubmissions(huntId);
-					setSubmissions(data.data);
-					hunt.submissions = data.data
-				}
-			)
-			.subscribe();
-	}, []);
+	const channel = supabase
+		.channel("host-submissions")
+		.on(
+			"postgres_changes",
+			{
+				event: "*",
+				schema: "public",
+				table: "submissions",
+			},
+			async (payload) => {
+				const data = await getSubmissions(huntId);
+				setSubmissions(data.data);
+				hunt.submissions = data.data;
+			}
+		)
+		.subscribe();
 
-  return (
+	return (
 		<>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">

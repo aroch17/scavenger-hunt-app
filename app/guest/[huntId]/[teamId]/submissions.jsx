@@ -9,24 +9,22 @@ const submissions = () => {
 		useTeamContext();
 	const [submissions, setSubmissions] = useState(imgObjects.data);
 
-	useEffect(() => {
-		const channel = supabase
-			.channel("guest-submissions")
-			.on(
-				"postgres_changes",
-				{
-					event: "*",
-					schema: "public",
-					table: "photopaths",
-				},
-				async (payload) => {
-					const data = await getHuntPhotoPaths(huntId);
-					setSubmissions(data.data);
-					imgObjects.data = data.data
-				}
-			)
-			.subscribe();
-	}, []);
+	const channel = supabase
+		.channel("guest-submissions")
+		.on(
+			"postgres_changes",
+			{
+				event: "*",
+				schema: "public",
+				table: "photopaths",
+			},
+			async (payload) => {
+				const data = await getHuntPhotoPaths(huntId);
+				setSubmissions(data.data);
+				imgObjects.data = data.data;
+			}
+		)
+		.subscribe();
 
 	return (
 		<>
