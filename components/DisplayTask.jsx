@@ -2,8 +2,8 @@ import { Text, View, Alert } from "react-native";
 import { React, useState } from "react";
 import FormField from "./FormField";
 import CustomButton from "./CustomButton";
-import { useMutation } from "@tanstack/react-query";
-import { addSubmission } from "../lib/supabase";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { addSubmission, updateTeamScore } from "../lib/supabase";
 import UploadImage from "./UploadImageButton";
 
 const DisplayTask = ({
@@ -25,7 +25,9 @@ const DisplayTask = ({
 		answer: "",
 	});
 
-	const mutation = useMutation({
+  const queryClient = useQueryClient();
+
+  const submissionMutation = useMutation({
 		mutationFn: addSubmission,
 		onSuccess: () => {
 			// Invalidate and refetch
@@ -33,27 +35,50 @@ const DisplayTask = ({
 		},
 	});
 
-	const submit = async () => {
-		if (form.answer === "") {
-			Alert.alert("Error", "Please fill in all fields");
-		} else if (form.answer === answer) {
-			Alert.alert("Answer was correct: " + form.answer);
-			mutation.mutate({
-				submission: form.answer,
-				task_id: taskId,
-				team_id: teamId,
-				hunt_id: huntId,
-			});
-		} else {
-			Alert.alert("Incorrect");
-		}
-	};
+  const teamScoreMutation = useMutation({
+		mutationFn: updateTeamScore,
+		onSuccess: () => {
+			// Invalidate and refetch
+			queryClient.invalidateQueries({ queryKey: ["teams"] });
+		},
+	});
 
-	return (
-		<View className="w-full justify-center min-h-[85vh] px-4 my-6">
-			<Text className={textStyles}>{title}</Text>
-			<Text className={textStyles}>{prompt}</Text>
-			<Text className={textStyles}>Type: {taskType}</Text>
+	const submit = async () => {
+    if (form.answer === "") {
+      Alert.alert("Error", "Please fill in all fields");
+    }
+		else if (form.answer === answer){
+			Alert.alert("Answer was correct: " + form.answer)
+      try {
+        setSubmitting(true);
+        await submissionMutation.mutateAsync({
+          submission: form.answer,
+          task_id: taskId,
+          team_id: teamId,
+          hunt_id: huntId
+        });
+        await teamScoreMutation.mutateAsync({
+          team_id: teamId,
+          points: task_points
+        });
+        Alert.alert("Submission successful and points updated");
+      } catch (error) {
+        Alert.alert("Error", error.message);
+      } finally {
+        setSubmitting(false);
+      }
+    }
+    else {
+      Alert.alert("Incorrect")
+    }
+  }
+
+  return (
+    <View className="w-full justify-center min-h-[85vh] px-4 my-6">
+      <Text className={textStyles}>{title}</Text>
+      <Text className={textStyles}>{prompt}</Text>
+      <Text className={textStyles}>Type: {taskType}</Text>
+      <Text className={textStyles}>Points: {task_points}</Text>
 
 			{taskType == "Text" ? (
 				<>

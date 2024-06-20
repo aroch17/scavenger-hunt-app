@@ -7,39 +7,43 @@ import { useHuntContext } from "./_layout";
 const HuntLeaderboard = () => {
 	const { hunt, isLoading } = useHuntContext();
 
+	const sortedTeams = hunt.teams.slice().sort((a, b) => b.score - a.score);
+
 	return (
 		<>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
-					<View className="bg-black items-center">
-						<Text className="mt-10 font-bold text-white text-3xl">
+						<Text className="mt-10 font-bold text-white text-3xl text-center">
 							Leaderboard
 						</Text>
-						<Team
-							key="1"
-              position="1"
-							title="Team 1"
-              points="30"
-							containerStyles="mt-7 border-2 border-white rounded-xl"
-              textStyles="text-yellow-500"
-						/>
-						<Team
-							key="2"
-              position="2"
-							title="Team 2"
-              points="27"
-							containerStyles="mt-7 border-2 border-white rounded-xl"
-              textStyles="text-stone-500"
-						/>
-						<Team
-							key="3"
-              position="3"
-							title="Team 3"
-              points="25"
-							containerStyles="mt-7 border-2 border-white rounded-xl"
-              textStyles="text-amber-600"
-						/>
-					</View>
+						<View className="w-full px-4 my-6">
+							{sortedTeams.length > 0 ? (
+								<FlatList
+									className="min-h-[80%] max-h-[95%]"
+									data={sortedTeams}
+									keyExtractor={(item, index) => index.toString()}
+									renderItem={({ item, index }) => (
+										<View>
+											<Team
+											key={index}
+              				position={index + 1}
+											title={item.name}
+              				points={item.score}
+											containerStyles="mt-7 border-2 border-white rounded-xl"
+              				textStyles="text-amber-600"
+											/>
+										</View>
+										
+									)}
+								/>
+							) : (
+								<Text className="text-white font-pregular text-xl">
+									No teams to display - error.
+								</Text>
+							)}
+						</View>
+						
+
 				</SafeAreaView>
 			)}
 		</>
