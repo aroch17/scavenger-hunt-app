@@ -28,6 +28,7 @@ const ChooseTeamLayout = () => {
 					<Stack>
 						<Stack.Screen name="add-team" options={{ headerShown: false }} />
 						<Stack.Screen name="choose-team" options={{ headerShown: false }} />
+						<Stack.Screen name="[teamId]" options={{ headerShown: false }} />
 					</Stack>
         </Context.Provider>
 			)}
