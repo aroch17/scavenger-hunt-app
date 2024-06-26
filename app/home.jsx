@@ -23,7 +23,7 @@ const Home = () => {
 							<CustomButton
 								title="Join a hunt"
 								containerStyles="mt-7 bg-white w-[80%] "
-								textStyles="text-black text-[16rem]"
+								textStyles="text-black text-xl"
 								handlePress={() => {
 									router.push("/choose-hunt")
 								}}
@@ -31,7 +31,7 @@ const Home = () => {
 							<CustomButton
 								title="Create a hunt"
 								containerStyles="mt-7 bg-white w-[80%]"
-								textStyles="text-black text-[16rem]"
+								textStyles="text-black text-xl"
 								handlePress={() => {
 									if (!isLoggedIn) router.push("/sign-in")
 									else router.push("hunts")
