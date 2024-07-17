@@ -11,9 +11,6 @@ const Team = ({
 	isLoading
 
 }) => {
-
-	console.log(typeof position)
-
 	switch (position) {
 		case 1:
 			positionTextStyle = "text-yellow-500";

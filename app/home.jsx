@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,7 +7,12 @@ import { useGlobalContext } from "../context/GlobalProvider";
 import CustomButton from "../components/CustomButton";
 
 const Home = () => {
-	const { isLoading, isLoggedIn } = useGlobalContext();
+	const { isLoading, isLoggedIn, userJoinedHuntId, userJoinedHuntTeamId } = useGlobalContext();
+
+	useEffect(() => {
+		if (userJoinedHuntTeamId) router.push(`guest/${userJoinedHuntId}/${userJoinedHuntTeamId}`)
+	}, []);
+
 	return (
 		<>
 			{!isLoading && (
@@ -25,7 +30,7 @@ const Home = () => {
 								containerStyles="mt-7 bg-white w-[80%] "
 								textStyles="text-black text-xl"
 								handlePress={() => {
-									router.push("/choose-hunt")
+									router.push("/choose-hunt");
 								}}
 							/>
 							<CustomButton
@@ -33,8 +38,8 @@ const Home = () => {
 								containerStyles="mt-7 bg-white w-[80%]"
 								textStyles="text-black text-xl"
 								handlePress={() => {
-									if (!isLoggedIn) router.push("/sign-in")
-									else router.push("hunts")
+									if (!isLoggedIn) router.push("/sign-in");
+									else router.push("hunts");
 								}}
 							/>
 						</View>

@@ -11,6 +11,8 @@ export const GlobalProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState("")
+  const [userJoinedHuntId, setUserJoinedHuntId] = useState(null)
+  const [userJoinedHuntTeamId, setUserJoinedHuntTeamId] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -24,8 +26,10 @@ export const GlobalProvider = ({ children }) => {
         setIsLoggedIn(true)
         const { data, error } = await getCurrentUserDetails(user)
         if (data) {
-          const { username } = data
+          const { username, huntId, teamId } = data
           setUsername(username)
+          if (huntId) setUserJoinedHuntId(huntId)
+          if (teamId) setUserJoinedHuntTeamId(teamId)
         }
       }
       else {
@@ -44,7 +48,11 @@ export const GlobalProvider = ({ children }) => {
         user,
         setUser,
         username,
-        setUsername
+        setUsername,
+        userJoinedHuntId,
+        setUserJoinedHuntId,
+        userJoinedHuntTeamId,
+        setUserJoinedHuntTeamId
       }}
     >
       {children}
