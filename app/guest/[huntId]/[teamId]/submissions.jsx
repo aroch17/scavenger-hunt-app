@@ -5,6 +5,7 @@ import { useTeamContext } from "./_layout";
 import { getHuntPhotoPaths, supabase } from "../../../../lib/supabase";
 
 const submissions = () => {
+	// TODO: Only show approved image submissions 
 	const { huntId, hunt, isLoading, CDNUrl, imgObjects, teamId } =
 		useTeamContext();
 	const [submissions, setSubmissions] = useState(imgObjects.data);
