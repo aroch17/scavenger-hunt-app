@@ -4,10 +4,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTeamContext } from "./_layout";
 import Submission from "../../../../components/Submission";
 import { getTeamSubmissions, supabase } from "../../../../lib/supabase";
+import { useGlobalContext } from "../../../../context/GlobalProvider";
 
 const profile = () => {
 	const { huntId, teamId, team, isLoading } = useTeamContext();
 	const [teamSubmissions, setTeamSubmissions] = useState(team.submissions);
+	const { username } = useGlobalContext()
 
 	const channel = supabase
 		.channel("guest-team-submissions")
@@ -30,6 +32,9 @@ const profile = () => {
 		<>
 			{!isLoading && (
 				<SafeAreaView className="bg-black h-full">
+					<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">
+						Name: {username}
+					</Text>
 					<Text className="text-3xl font-semibold text-white mt-10 font-psemibold w-full text-center">
 						Your submissions:
 					</Text>

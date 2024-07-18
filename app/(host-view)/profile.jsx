@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { StatusBar } from "expo-status-bar";
 
 const Profile = () => {
-	const { username, isLoading, setUser, setIsLoggedIn } = useGlobalContext();
+	const { username, isLoading, setUser, setIsLoggedIn, setUserJoinedHuntId, setUserJoinedHuntTeamId } = useGlobalContext();
 	return (
 		<>
 			{!isLoading && (
@@ -19,6 +19,8 @@ const Profile = () => {
 								signOutUser()
 								setIsLoggedIn(false)
 								setUser(null);
+								setUserJoinedHuntId(null)
+								setUserJoinedHuntTeamId(null)
 								router.dismiss()
 								router.replace("/home");
 							}}

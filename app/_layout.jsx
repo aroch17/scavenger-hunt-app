@@ -45,6 +45,7 @@ export default function App() {
 				<Stack>
 					<Stack.Screen name="index" options={{ headerShown: false }} />
 					<Stack.Screen name="teams/[huntId]" options={{ headerShown: false }} />
+					<Stack.Screen name="authentication-choice" options={{ headerShown: false }} />
 					<Stack.Screen name="choose-hunt" options={{ headerShown: false }} />
 					<Stack.Screen name="add-task" options={{ headerShown: false }} />
 					<Stack.Screen name="add-announcement" options={{ headerShown: false }} />

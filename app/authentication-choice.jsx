@@ -5,14 +5,10 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useGlobalContext } from "../context/GlobalProvider";
 import CustomButton from "../components/CustomButton";
+import { signInAnonymously, getCurrentUserDetails } from "../lib/supabase";
 
-const Home = () => {
-	const { isLoading, isLoggedIn, userJoinedHuntId, userJoinedHuntTeamId, user } = useGlobalContext();
-
-	useEffect(() => {
-		if (userJoinedHuntTeamId) router.push(`guest/${userJoinedHuntId}/${userJoinedHuntTeamId}`)
-	}, []);
-
+const AuthenticatedChoice = () => {
+	const { isLoading, isLoggedIn, setIsLoggedIn, setUsername, setUser } = useGlobalContext();
 	return (
 		<>
 			{!isLoading && (
@@ -20,27 +16,32 @@ const Home = () => {
 					<ScrollView contentContainerStyle={{ height: "100%" }}>
 						<View className="bg-black h-full flex justify-center items-center">
 							<Text className="text-white text-3xl font-pbold">
-								Side Quests
-							</Text>
-							<Text className="text-white text-xl font-pbold mb-4">
-								Ready to go on your next quest?
+								Select an option:
 							</Text>
 							<CustomButton
-								title="Join a hunt"
+								title="Sign In"
 								containerStyles="mt-7 bg-white w-[80%] "
 								textStyles="text-black text-xl"
 								handlePress={() => {
-									if (!isLoggedIn) router.push("/authentication-choice")
-									else router.push("/choose-hunt");
+									router.push("/sign-in");
 								}}
 							/>
 							<CustomButton
-								title="Create a hunt"
+								title="Continue as Guest"
 								containerStyles="mt-7 bg-white w-[80%]"
 								textStyles="text-black text-xl"
-								handlePress={() => {
-									if (!isLoggedIn || user.is_anonymous) router.push("/sign-in");
-									else router.push("hunts");
+								handlePress={async () => {
+									const { data, error } = await signInAnonymously();
+									if (data) {
+										setUser(data.session.user);
+										setIsLoggedIn(true);
+										const { data: userDetailsData, error } =
+											await getCurrentUserDetails(data.session.user);
+                    if (userDetailsData) {
+                      setUsername(userDetailsData.username)
+                    }
+									}
+                  router.replace("/choose-hunt");
 								}}
 							/>
 						</View>
@@ -52,4 +53,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default AuthenticatedChoice;
