@@ -53,6 +53,7 @@ export default function App() {
 					<Stack.Screen name="(host-view)" options={{ headerShown: false }} />
 					<Stack.Screen name="guest/[huntId]/[teamId]" options={{ headerShown: false }} />
 					<Stack.Screen name="task/[teamId]" options={{ headerShown: false }} />
+					<Stack.Screen name="submission" options={{ headerShown: false }} />
 					<Stack.Screen name="hunt/[huntId]" options={{ headerShown: false }} />
 					<Stack.Screen name="home" options={{ headerShown: false }} />
 					<Stack.Screen name="hunt-builder" options={{ headerShown: false }} />
