@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Submission from "../../../components/Submission";
 import { useHuntContext } from "./_layout";
 import { getSubmissions, supabase } from "../../../lib/supabase";
+import { router } from "expo-router";
 
 const HuntHome = () => {
 	const { huntId, hunt, isLoading } = useHuntContext();
@@ -45,8 +46,12 @@ const HuntHome = () => {
 										task_id={item.task_id}
 										created_at={item.created_at}
 										team_id={item.team_id}
+										requires_approval={item.requires_approval}
 										containerStyles="mt-7 border-2 border-white"
 										textStyles="text-white"
+										handlePress={() => {
+											router.push(`../submission/${item.id}`);
+										}}
 									/>
 								)}
 							/>

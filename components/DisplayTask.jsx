@@ -99,7 +99,7 @@ const DisplayTask = ({
 				</>
 			) : taskType == "Image" ? (
 				<>
-					<UploadImage huntId={huntId} teamId={teamId}/>
+					<UploadImage huntId={huntId} teamId={teamId} taskId={taskId}/>
 				</>
 			) : (
         <></>

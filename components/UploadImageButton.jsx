@@ -5,7 +5,7 @@ import CustomButton from "./CustomButton";
 import { uploadSubmissionAndStoreInDB } from "../lib/supabase";
 import * as ImageManipulator from "expo-image-manipulator";
 
-const UploadImageButton = ({ huntId, teamId }) => {
+const UploadImageButton = ({ huntId, teamId, taskId }) => {
 	return (
 		<View>
 			<CustomButton
@@ -34,6 +34,7 @@ const UploadImageButton = ({ huntId, teamId }) => {
 							uploadSubmissionAndStoreInDB(
 								huntId,
 								teamId,
+								taskId,
 								compressedImageData.base64
 							);
 						}
