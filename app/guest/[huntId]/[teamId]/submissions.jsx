@@ -4,8 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTeamContext } from "./_layout";
 import { getHuntPhotoPaths, supabase } from "../../../../lib/supabase";
 
-const submissions = () => {
-	// TODO: Only show approved image submissions 
+const submissions = () => { 
 	const { huntId, hunt, isLoading, CDNUrl, imgObjects, teamId } =
 		useTeamContext();
 	const [submissions, setSubmissions] = useState(imgObjects.data);
@@ -47,7 +46,7 @@ const submissions = () => {
 										resizeMode: "contain",
 									}}
 									source={{
-										uri: `${CDNUrl}/${huntId}/${item.team_id}/${item.uuid}`,
+										uri: `${CDNUrl}/${huntId}/${item.team_id}/${item.image_uuid}`,
 									}}
 								/>
 							)}
