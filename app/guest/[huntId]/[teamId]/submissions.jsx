@@ -16,7 +16,7 @@ const submissions = () => {
 			{
 				event: "*",
 				schema: "public",
-				table: "photopaths",
+				table: "submissions",
 			},
 			async (payload) => {
 				const data = await getHuntPhotoPaths(huntId);

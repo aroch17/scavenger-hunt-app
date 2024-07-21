@@ -30,6 +30,7 @@ const Context = createContext();
 export const useHuntContext = () => useContext(Context);
 
 const HuntLayout = () => {
+	// FIXME: Hunt tasks are sometimes stale
 	const { huntId } = useLocalSearchParams();
 
 	let hunt = null
