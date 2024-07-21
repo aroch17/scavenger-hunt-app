@@ -10,6 +10,10 @@ const HuntHome = () => {
 	const { huntId, hunt, isLoading } = useHuntContext();
 	const [submissions, setSubmissions] = useState(hunt.submissions);
 
+	useEffect(() => {
+    setSubmissions(hunt.submissions);
+  }, [hunt.submissions]);
+
 	const channel = supabase
 		.channel("host-submissions")
 		.on(

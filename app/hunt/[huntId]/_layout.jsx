@@ -1,36 +1,14 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { Tabs } from "expo-router";
-import { Alert, Image, Text, View } from "react-native";
-import { icons } from "../../../constants";
 import { useQuery } from "@tanstack/react-query";
-import { getHunt, supabase } from "../../../lib/supabase";
+import { getHunt } from "../../../lib/supabase";
 import { Ionicons } from '@expo/vector-icons';
-
-const TabIcon = ({ icon, color, name, focused }) => {
-	return (
-		<View className="flex items-center justify-center gap-2">
-			<Image
-				source={icon}
-				resizeMode="contain"
-				tintColor={color}
-				className="w-5 h-5"
-			/>
-			<Text
-				className={`${focused ? "font-psemibold" : "font-pregular"} text-xs`}
-				style={{ color: color }}
-			>
-				{name}
-			</Text>
-		</View>
-	);
-};
 
 const Context = createContext();
 export const useHuntContext = () => useContext(Context);
 
 const HuntLayout = () => {
-	// FIXME: Hunt tasks are sometimes stale
 	const { huntId } = useLocalSearchParams();
 
 	let hunt = null
